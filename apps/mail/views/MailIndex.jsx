@@ -23,6 +23,8 @@ export function MailIndex() {
         console.log('Car removed successfully ')
     }
 
+    console.log(mails)
+
 
     if (!mails) return <div>Loading emails...</div>
     return <section className="mail-index">
