@@ -65,8 +65,8 @@ function _setNextMailId(mail) {
             const mailIdx = mails.findIndex((currMail) => currMail.id === mail.id)
             const nextMail = mails[mailIdx + 1] ? mails[mailIdx + 1] : mails[0]
             const prevMail = mails[mailIdx - 1] ? mails[mailIdx - 1] : mails[mails.length - 1]
-            mail.nextMail = nextMail.id
-            mail.prevMail = prevMail.id
+            mail.nextMailId = nextMail.id
+            mail.prevMailId = prevMail.id
             return mail
         })
 }
@@ -75,9 +75,9 @@ function _createMails() {
     let emails = storageService.loadFromStorage(MAIL_KEY)
     if (!emails || !emails.length) {
         emails = []
-        emails.push(_createEmail('Hello1', loggedinUser.fullname, loggedinUser.email))
-        emails.push(_createEmail('Hello2', loggedinUser.fullname, loggedinUser.email))
-        emails.push(_createEmail('Hello3', loggedinUser.fullname, loggedinUser.email))
+        emails.push(_createEmail('Hello Haim', loggedinUser.fullname, loggedinUser.email))
+        emails.push(_createEmail('Whats up Nadav?', loggedinUser.fullname, loggedinUser.email))
+        emails.push(_createEmail(' Offer from Nigirian Prince ', loggedinUser.fullname, loggedinUser.email))
         console.log('service -> _createMails -> emails', emails)
 
         storageService.saveToStorage(MAIL_KEY, emails)
