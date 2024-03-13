@@ -58,7 +58,7 @@ function _createMails() {
         emails = []
         emails.push(_createEmail('Hello1', loggedinUser.fullname, loggedinUser.email))
         emails.push(_createEmail('Hello2', loggedinUser.fullname, loggedinUser.email))
-        emails.push(_createEmail('Hello2', loggedinUser.fullname, loggedinUser.email))
+        emails.push(_createEmail('Hello3', loggedinUser.fullname, loggedinUser.email))
         console.log('service -> _createMails -> emails', emails)
 
         storageService.saveToStorage(MAIL_KEY, emails)

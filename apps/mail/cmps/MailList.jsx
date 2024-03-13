@@ -1,4 +1,8 @@
 const { useState, useEffect } = React
+const { Link, useSearchParams } = ReactRouterDOM
+
+import { MailPreview } from "../cmps/MailPreview.jsx"
+
 
 export function MailList({ mails, onRemoveMail }) {
     console.log('mail list - mails', mails)
@@ -14,14 +18,21 @@ export function MailList({ mails, onRemoveMail }) {
                 {
                     mails.map(mail =>
                         <tr className="mail" key={mail.id}>
-                            <td>{mail.from}</td>
-                            <td>{mail.subject}</td>
+                            <Link to={`/mail/${mail.id}`}>
 
-                            {/* call LongTXT */}
-                            {/* <td>{mail.body}</td> */}
+                                <td>{mail.from}</td>
+                                <td>{mail.subject}</td>
 
-                            <td>{mail.sentAt}</td>
-                            <td><button className="remove-btn" onClick={() => onRemoveMail(mail.id)}>X</button></td>
+                                {/* call LongTXT */}
+                                {/* <td>{mail.body}</td> */}
+
+                                <td>{mail.sentAt}</td>
+                                <td><button className="remove-btn"
+                                    onClick={() => onRemoveMail(mail.id)}>X</button>
+                                </td>
+
+                                <MailPreview mail={mail} />
+                            </Link>
                         </tr>)
                 }
             </tbody>
