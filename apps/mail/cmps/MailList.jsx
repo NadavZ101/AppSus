@@ -18,21 +18,21 @@ export function MailList({ mails, onRemoveMail }) {
                 {
                     mails.map(mail =>
                         <tr className="mail" key={mail.id}>
-                            <Link to={`/mail/${mail.id}`}>
+                            {/* <Link to={`/mail/${mail.id}`}> */}
 
-                                <td>{mail.from}</td>
-                                <td>{mail.subject}</td>
+                            <td>{mail.from}</td>
+                            <td>{mail.subject}</td>
 
-                                {/* call LongTXT */}
-                                {/* <td>{mail.body}</td> */}
+                            {/* call LongTXT */}
+                            {/* <td>{mail.body}</td> */}
 
-                                <td>{mail.sentAt}</td>
-                                <td><button className="remove-btn"
-                                    onClick={() => onRemoveMail(mail.id)}>X</button>
-                                </td>
+                            <td>{mail.sentAt}</td>
+                            <td><button className="remove-btn"
+                                onClick={() => onRemoveMail(mail.id)}>X</button>
+                            </td>
 
-                                <MailPreview mail={mail} />
-                            </Link>
+                            {/* <MailPreview mail={mail} /> */}
+                            {/* </Link> */}
                         </tr>)
                 }
             </tbody>
