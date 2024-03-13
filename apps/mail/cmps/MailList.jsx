@@ -5,9 +5,6 @@ import { MailPreview } from "../cmps/MailPreview.jsx"
 
 
 export function MailList({ mails, onRemoveMail }) {
-    console.log('mail list - mails', mails)
-
-
 
     return <div>Mail list
 
@@ -16,27 +13,9 @@ export function MailList({ mails, onRemoveMail }) {
             </thead>
             <tbody>
                 {
-                    mails.map(mail =>
-                        <tr className="mail" key={mail.id}>
-                            {/* <Link to={`/mail/${mail.id}`}> */}
-
-                            <td>{mail.from}</td>
-                            <td>{mail.subject}</td>
-
-                            {/* call LongTXT */}
-                            {/* <td>{mail.body}</td> */}
-
-                            <td>{mail.sentAt}</td>
-                            <td><button className="remove-btn"
-                                onClick={() => onRemoveMail(mail.id)}>X</button>
-                            </td>
-
-                            {/* <MailPreview mail={mail} /> */}
-                            {/* </Link> */}
-                        </tr>)
+                    mails.map((mail) => (<MailPreview key={mail.id} mail={mail} onRemoveMail={onRemoveMail} />))
                 }
             </tbody>
         </table>
-
     </div>
 }

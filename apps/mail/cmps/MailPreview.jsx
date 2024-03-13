@@ -1,9 +1,11 @@
 
 
-export function MailPreview({ mail }) {
-    console.log(mail)
+export function MailPreview({ mail, onRemoveMail }) {
 
-    return <article className="mail-preview">
-        <h3>{mail.subject}</h3>
-    </article>
+    return <tr className="mail-preview">
+        <td>{mail.from}</td>
+        <td>{mail.subject}</td>
+        <td>{mail.sentAt}</td>
+        <td><button className="remove-btn" onClick={() => onRemoveMail(mail.id)}>X</button></td>
+    </tr>
 }
