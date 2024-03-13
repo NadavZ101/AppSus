@@ -4,9 +4,7 @@
 
 .note-container {
     column-count: 3;
-    /* Number of columns */
-    column-gap: 20px;
-    /* Spacing between columns */
+    column-gap: 10px;
 }
 
 .note-display {
@@ -18,6 +16,7 @@
     box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
     padding: 2em;
     margin-bottom: 0.8em;
+    border-radius: 0.5em;
 }
 
 .note-display .remove-btn {
