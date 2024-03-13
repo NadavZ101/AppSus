@@ -13,7 +13,7 @@ export function NotePreview({ notes, onRemoveNote }) {
                 <span className="note-title">{note.info.title}</span>
                 <button className="remove-btn" onClick={() => onRemoveNote(note.id)}>X</button>
 
-                <span>{note.info.txt}</span>
+                <span contentEditable="true">{note.info.txt}</span>
 
             </div>
 

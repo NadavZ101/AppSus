@@ -51,6 +51,8 @@ export function NoteIndex() {
 
     return <section>
         <div>note app</div>
+        <Link to="/note/edit"><button>Add a Note</button></Link>
+
         <NotePreview
             notes={notes}
             onRemoveNote={onRemoveNote}
