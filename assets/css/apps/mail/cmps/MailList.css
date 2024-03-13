@@ -1,5 +1,29 @@
  /* mail list */
 
- h1{
-    color:red
+ h1 {
+    color: red
+ }
+
+ body {
+    background: var(--mail-bg);
+ }
+
+ .mails-table {
+    background-color: var(--mail-table-bg);
+    border: 1px solid;
+    border-radius: 0.8em;
+
+ }
+
+ .mails-table *> {
+    flex: 1;
+    justify-content: space-between;
+ }
+
+ tr {
+    border: 1px solid black;
+ }
+
+ td {
+    padding: 0 1em;
  }
