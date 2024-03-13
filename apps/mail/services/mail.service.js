@@ -27,6 +27,7 @@ const loggedinUser = {
 
 export const mailService = {
     query,
+    get,
 }
 
 // Debugging 
@@ -36,6 +37,12 @@ _createMails()
 
 function query() {
     return storageAsyncService.query(MAIL_KEY)
+}
+
+function get(mailId) {
+    console.log('service-get ->  mailId', mailId)
+    return storageAsyncService.get(MAIL_KEY, mailId)
+        .then(mail => _setNextMailId(mail))
 }
 
 // function removeFromIndex(emailId) {
@@ -50,6 +57,18 @@ function query() {
 
 function getEmptyEmail(id = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {
     return { id, subject, body, isRead, sentAt, removedAt, from, to }
+}
+
+function _setNextMailId(mail) {
+    return storageAsyncService.query(MAIL_KEY)
+        .then((mails) => {
+            const mailIdx = mails.findIndex((currMail) => currMail.id === mail.id)
+            const nextMail = mails[mailIdx + 1] ? mails[mailIdx + 1] : mails[0]
+            const prevMail = mails[mailIdx - 1] ? mails[mailIdx - 1] : mails[mails.length - 1]
+            mail.nextMail = nextMail.id
+            mail.prevMail = prevMail.id
+            return mail
+        })
 }
 
 function _createMails() {
