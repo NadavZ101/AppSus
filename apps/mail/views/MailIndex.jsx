@@ -1,5 +1,6 @@
 const { useState, useEffect } = React
 
+import { MailList } from "../cmps/MailList.jsx"
 import { mailService } from "./../services/mail.service.js"
 
 export function MailIndex() {
@@ -17,20 +18,17 @@ export function MailIndex() {
             })
     }
 
+    function onRemoveMail(mailId) {
+        setMails((prevMails) => prevMails.filter(mail => mail.id !== mailId))
+        console.log('Car removed successfully ')
+    }
+
+
     if (!mails) return <div>Loading emails...</div>
     return <section className="mail-index">
 
-        <ul>
-            {
-                mails.map(mail => <li key={mail.id}>
-                    {mail.from}
-                    {mail.subject}
-                    {mail.sentAt}
-                </li>)
-            }
-        </ul>
+        <MailList mails={mails} onRemoveMail={onRemoveMail} />
 
-        <div>mail app</div>
     </section>
 
 }

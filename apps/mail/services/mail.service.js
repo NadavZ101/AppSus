@@ -38,6 +38,16 @@ function query() {
     return storageAsyncService.query(MAIL_KEY)
 }
 
+// function removeFromIndex(emailId) {
+//     console.log(emailId)
+//     query()
+//         .then(emails => {
+//             const newEmails = emails.filter(email => email.id !== emailId)
+//         })
+//     console.log('removeFromIndex - newEmails', newEmails)
+//     return newEmails
+// }
+
 function getEmptyEmail(id = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {
     return { id, subject, body, isRead, sentAt, removedAt, from, to }
 }
