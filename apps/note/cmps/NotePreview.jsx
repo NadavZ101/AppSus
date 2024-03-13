@@ -4,7 +4,6 @@ export function NotePreview({ notes, onRemoveNote }) {
 
 
 
-
     if (!notes.length) return <div>No notes to show</div>
     return <section className="note-container">
 
