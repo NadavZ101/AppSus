@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+
+.note-container{
+    column-count: 3;
+}
+
+.note-display {
+    background-color: #fff;
+    width: max-content;
+    height: 3em;
+    border: 1px solid #e0e0e0;
+    box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
