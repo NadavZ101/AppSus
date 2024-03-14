@@ -47,24 +47,16 @@ function remove(noteId) {
 }
 
 function save(note) {
+    console.log(note);
     if (note.id) {
         return storageAsyncService.put(NOTE_KEY, note)
     } else {
-        note = _createNote(note.type, note.info.title)
+        note = _createNote(note.title,note.type)
         return storageAsyncService.post(NOTE_KEY, note)
     }
 }
 
-function getEmptyNote(type = '', id = '',
-    createdAt = 1112222,
-    isPinned = true,
-    style = { backgroundColor: '#00d' },
-    info = { title, txt: 'Fullstack Me Baby!' }) {
-    return {
-        id, createdAt, type, isPinned, style, info
 
-    }
-}
 
 
 function _createNotes() {
@@ -97,20 +89,32 @@ function _createNotes() {
                     ]
                 }
             }
-            ]
+        ]
 
-            }
-                storageService.saveToStorage(NOTE_KEY, notes)
+    }
+    storageService.saveToStorage(NOTE_KEY, notes)
 
-                // notes.push(_createNote('Hello', 'NoteTxt'))
-                // notes.push(_createNote('Hi', 'NoteTxt'))
-                // notes.push(_createNote('Hola', 'NoteTxt'))
-            }
+    // notes.push(_createNote('Hello', 'NoteTxt'))
+    // notes.push(_createNote('Hi', 'NoteTxt'))
+    // notes.push(_createNote('Hola', 'NoteTxt'))
+}
 
+function getEmptyNote(){
+    return {
+        createdAt: 1112222,
+        type: '',
+        isPinned: false,
+        style: { backgroundColor: '#00d' },
+        info: { title: '', txt: '' }
+    }
+}
 
+function _createNote(title, type) {
+    const note = getEmptyNote()
+    note.id = utilService.makeId()
+    note.info.title = title
+    note.type=type
+    console.log(note   );
 
-    // function _createNote(title, type) {
-    //     const note = getEmptyNote(title, type)
-    //     note.id = utilService.makeId()
-    //     return note
-    // }
+    return note
+}

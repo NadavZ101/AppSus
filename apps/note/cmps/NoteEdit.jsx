@@ -10,7 +10,7 @@ export function NoteEdit() {
     const [noteToEdit, setNoteToEdit] = useState(noteService.getDefaultFilter())
     const navigate = useNavigate()
     const { noteId } = useParams()
-	// const inputRef = useRef()
+    // const inputRef = useRef()
 
     useEffect(() => {
         // inputRef.current.focus()
@@ -18,6 +18,8 @@ export function NoteEdit() {
     }, [])
 
     function loadNote() {
+        console.log('hello');
+
         noteService.get(noteId)
             .then(note => setNoteToEdit(note))
             // navigate('/note')
@@ -25,21 +27,22 @@ export function NoteEdit() {
                 console.error('Had issues loading note', err)
 
             })
+    }
 
-            function onSaveNote(ev) {
-                ev.preventDefault()
-        
-                noteService.save(noteToEdit)
-                    .then(savedNote => {
-                        navigate('/note')
-                        showSuccessMsg('note saved successfully')
-                    })
-                    .catch(err => {
-                        console.error('Had issues saving note', err)
-                        showErrorMsg('could not save note')
-                    })
-        
-            }
+    function onSaveNote(ev) {
+        ev.preventDefault()
+
+        noteService.save(noteToEdit)
+            .then(savedNote => {
+                navigate('/note')
+                showSuccessMsg('note saved successfully')
+            })
+            .catch(err => {
+                console.error('Had issues saving note', err)
+                showErrorMsg('could not save note')
+            })
+
+    }
 
     function handleChange({ target }) {
         const field = target.name
@@ -64,13 +67,16 @@ export function NoteEdit() {
 
     const { title, type } = noteToEdit
 
+
+
     return (
+
         <section className="note-edit">
             <button onClick={() => setShowModal(true)}>Open Modal</button>
 
             {showModal && (
                 <form onSubmit={onSaveNote} >
-                    <dialog className="note-modal" method="dialog">
+                    {/* <dialog className="note-modal" method="dialog"> */}
                     <label htmlFor="title">Title:</label>
                     <input
                         type="text"
@@ -96,7 +102,7 @@ export function NoteEdit() {
 
                     <button>Save</button>
                     <button onClick={() => setShowModal(false)}>Close</button>
-                    </dialog>
+                    {/* </dialog> */}
                 </form>
             )}
         </section>
@@ -104,4 +110,4 @@ export function NoteEdit() {
 
 
 }
-}
+

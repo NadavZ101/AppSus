@@ -1,4 +1,5 @@
 
+const { Link } = ReactRouterDOM
 
 export function NotePreview({ notes, onRemoveNote }) {
 
@@ -13,8 +14,8 @@ export function NotePreview({ notes, onRemoveNote }) {
                 <span className="note-title">{note.info.title}</span>
                 <button className="remove-btn" onClick={() => onRemoveNote(note.id)}>X</button>
 
-                <span contentEditable="true">{note.info.txt}</span>
-
+                <span >{note.info.txt}</span>
+                {/* contentEditable="true" */}
             </div>
 
             )
