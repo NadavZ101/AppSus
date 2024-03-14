@@ -33,6 +33,7 @@ export const mailService = {
     getFormatMonthYear,
     moveToTrash,
     remove,
+    readMail,
 }
 
 // Debugging 
@@ -76,6 +77,16 @@ function moveToTrash(mailId) {
 
 function remove(mailId) {
     return storageAsyncService.remove(MAIL_KEY, mailId)
+}
+
+function readMail(mailId) {
+    console.log(mailId)
+    get(mailId)
+        .then(mail => {
+            mail.isRead = true
+            console.log(mail)
+            save(mail)
+        })
 }
 
 function getEmptyMail(id = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {

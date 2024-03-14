@@ -1,10 +1,10 @@
 const { Link } = ReactRouterDOM
 
 
-export function MailPreview({ mail, onRemoveMail, onDeleteMail }) {
+export function MailPreview({ mail, onRemoveMail, onDeleteMail, onReadMail }) {
 
     return <tr className="mail-preview">
-        <Link to={`/mail/${mail.id}`}>
+        <Link to={`/mail/${mail.id}`} onClick={() => onReadMail(mail.id)}>
             <td>{mail.from}</td>
             <td>{mail.subject}</td>
             {/* <td>{mail.sentAt}</td> */}

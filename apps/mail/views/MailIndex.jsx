@@ -8,17 +8,18 @@ import { mailService } from "./../services/mail.service.js"
 export function MailIndex() {
 
     const [mails, setMails] = useState(null)
-    const [isSentBox, setIsSentBox] = useState('inbox')
+    const [folderMail, setFolderMail] = useState('inbox')
+    const [isReadMail, setIsReadMail] = useState(false)
     const mailId = useParams()
 
     useEffect(() => {
         if (!mailId.mailId) loadMails()
         else loadMail(mailId.mailId)
         console.log(mailId)
-    }, [mailId.mailId])
+    }, [mailId.mailId, isReadMail])
 
     function changeFolder() {
-        switch (isSentBox) {
+        switch (folderMail) {
             case 'inbox':
                 value = 'inbox'
                 break
@@ -37,7 +38,7 @@ export function MailIndex() {
 
     function loadMails() {
         console.log('loadMails')
-        if (isSentBox === 'inbox') {
+        if (folderMail === 'inbox') {
             mailService.query()
                 .then(mails => {
                     const inboxMails = mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
@@ -45,7 +46,7 @@ export function MailIndex() {
                     setMails(inboxMails)
                 })
 
-        } else if (isSentBox === 'sent') {
+        } else if (folderMail === 'sent') {
             mailService.query()
                 .then(mails => {
                     const sentMails = mails.filter(mail => mail.to !== 'user@appsus.com' && !mail.removedAt)
@@ -53,7 +54,7 @@ export function MailIndex() {
                     setMails(sentMails)
                 })
 
-        } else if (isSentBox === 'trash') {
+        } else if (folderMail === 'trash') {
             mailService.query()
                 .then(mails => {
                     const trashMails = mails.filter(mail => mail.removedAt)
@@ -94,6 +95,17 @@ export function MailIndex() {
             })
     }
 
+    function onReadMail(mailId) {
+        console.log(mailId)
+        mailService.readMail(mailId)
+            .then(mail => {
+                console.log(mail)
+                setIsReadMail(...mail, mail.isRead)
+                console.log(mail)
+
+            })
+    }
+
     console.log(mails)
 
     if (!mails) return
@@ -102,13 +114,13 @@ export function MailIndex() {
         <MailNavBar />
         <nav>
             <Link to="/mail/:mailId">Read Mail(Details)</Link>
-            <Link to="/mail/list" onClick={() => changeFolder(setIsSentBox('inbox'))}>Inbox</Link>
-            <Link to="/mail/list" onClick={() => changeFolder(setIsSentBox('sent'))}>Sent</Link>
-            <Link to="/mail/list" onClick={() => changeFolder(setIsSentBox('trash'))}>Trash</Link>
+            <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('inbox'))}>Inbox</Link>
+            <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('sent'))}>Sent</Link>
+            <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('trash'))}>Trash</Link>
             {/* <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link> */}
 
             {/* {isSentBox && */}
-            <MailList mails={mails} onRemoveMail={onTrashMail} onDeleteMail={onDeleteMail} />
+            <MailList mails={mails} onRemoveMail={onTrashMail} onDeleteMail={onDeleteMail} onReadMail={onReadMail} />
             {/* } */}
         </nav>
         <Outlet />
