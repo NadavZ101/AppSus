@@ -8,7 +8,7 @@ import { mailService } from "./../services/mail.service.js"
 export function MailIndex() {
 
     const [mails, setMails] = useState(null)
-    const [isSentBox, setIsSentBox] = useState(false)
+    const [isSentBox, setIsSentBox] = useState('inbox')
     const mailId = useParams()
 
     useEffect(() => {
@@ -16,9 +16,28 @@ export function MailIndex() {
         console.log(mailId)
     }, [mailId.mailId])
 
+    function changeFolder() {
+        switch (isSentBox) {
+            case 'inbox':
+                value = 'inbox'
+                break
+            case 'sent':
+                value = 'sent'
+                break
+            case 'trash':
+                value = 'trash'
+                break
+            case 'draft':
+                value = 'draft'
+            default:
+                break
+        }
+    }
+
+
     function loadMails() {
         console.log('loadMails')
-        if (!isSentBox) {
+        if (isSentBox === 'inbox') {
             mailService.query()
                 .then(mails => {
                     const inboxMails = mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
@@ -26,12 +45,20 @@ export function MailIndex() {
                     setMails(inboxMails)
                 })
 
-        } else {
+        } else if (isSentBox === 'sent') {
             mailService.query()
                 .then(mails => {
                     const sentMails = mails.filter(mail => mail.to !== 'user@appsus.com' && !mail.removedAt)
                     console.log('sent box = ', sentMails)
                     setMails(sentMails)
+                })
+
+        } else if (isSentBox === 'trash') {
+            mailService.query()
+                .then(mails => {
+                    const trashMails = mails.filter(mail => mail.removedAt)
+                    console.log('trash box = ', trashMails)
+                    setMails(trashMails)
                 })
         }
     }
@@ -52,8 +79,10 @@ export function MailIndex() {
         <MailNavBar />
         <nav>
             <Link to="/mail/:mailId">Read Mail(Details)</Link>
-            <Link to="/mail/list" onClick={() => setIsSentBox(false)}>Inbox</Link>
-            <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link>
+            <Link to="/mail/list" onClick={() => changeFolder(setIsSentBox('inbox'))}>Inbox</Link>
+            <Link to="/mail/list" onClick={() => changeFolder(setIsSentBox('sent'))}>Sent</Link>
+            <Link to="/mail/list" onClick={() => changeFolder(setIsSentBox('trash'))}>Trash</Link>
+            {/* <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link> */}
 
             {/* {isSentBox && */}
             <MailList mails={mails} onRemoveMail={onRemoveMail} />

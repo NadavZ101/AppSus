@@ -51,12 +51,13 @@ function get(mailId) {
 
 function save(mail) {
     let { subject, from, to, body, sentAt } = mail
-    console.log(mail)
+
     if (mail.id) {
         return storageAsyncService.put(MAIL_KEY, mail)
     } else {
         sentAt = Date.now()
         from = loggedinUser.email
+
         mail = _createMail(subject, from, to, body, sentAt)
         return storageAsyncService.post(MAIL_KEY, mail)
     }
