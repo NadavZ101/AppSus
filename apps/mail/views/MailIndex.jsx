@@ -13,6 +13,7 @@ export function MailIndex() {
 
     useEffect(() => {
         if (!mailId.mailId) loadMails()
+        else loadMail(mailId.mailId)
         console.log(mailId)
     }, [mailId.mailId])
 
@@ -60,6 +61,15 @@ export function MailIndex() {
                     setMails(trashMails)
                 })
         }
+    }
+
+    function loadMail(mailId) {
+        let singleMail = []
+        mailService.get(mailId)
+            .then(mail => {
+                singleMail.push(mail)
+                setMails(singleMail)
+            })
     }
 
     function onTrashMail(mailId) {

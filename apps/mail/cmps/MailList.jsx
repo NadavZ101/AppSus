@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link, useSearchParams } = ReactRouterDOM
+// const { Link, useSearchParams, useHistory } = ReactRouterDOM
 
 import { MailPreview } from "../cmps/MailPreview.jsx"
 
@@ -18,12 +18,8 @@ export function MailList({ mails, onRemoveMail, onDeleteMail }) {
                 </thead>
                 <tbody>
                     {
-                        <React.Fragment>
-                            {
-                                mails.map((mail) =>
-                                    (< MailPreview key={mail.id} mail={mail} onRemoveMail={onRemoveMail} onDeleteMail={onDeleteMail} />))
-                            }
-                        </React.Fragment>
+                        mails.map((mail) =>
+                            (< MailPreview key={mail.id} mail={mail} onRemoveMail={onRemoveMail} onDeleteMail={onDeleteMail} />))
                     }
                 </tbody>
             </table>
