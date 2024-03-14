@@ -11,7 +11,7 @@
     width: 15em;
     height: auto;
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 0.5em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 16px;
     cursor: pointer;
@@ -24,6 +24,7 @@
 
 .note-display:hover {
     transform: translateY(-4px);
+
 }
 
 .note-title {
@@ -36,12 +37,17 @@
  height: 16px;
  width: 16px;
  overflow: visible;
- position: absolute;
+display: block;
  left: 0;
  bottom: -1.5em;
 }
 
+.note-display:hover.note-btn{
+    display: block;
+
+}
+
 .note-display div {
-    font-size: 14px;
+    font-size: 0.9em;
     color: #666666;
 }

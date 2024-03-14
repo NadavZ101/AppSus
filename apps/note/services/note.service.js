@@ -34,12 +34,12 @@ function query(filterBy = getDefaultFilter()) {
 }
 
 function getDefaultFilter() {
-    return { 
+    return {
         info: { title: '' },
-        type: '' 
+        type: ''
     }
 }
- 
+
 function get(noteId) {
     return storageAsyncService.get(NOTE_KEY, noteId)
     // .then(car => _setNextPrevCarId(note))
@@ -47,6 +47,7 @@ function get(noteId) {
 }
 
 function remove(noteId) {
+    console.log(noteId);
     return storageAsyncService.remove(NOTE_KEY, noteId)
 }
 
@@ -55,12 +56,12 @@ function save(note) {
         return storageAsyncService.put(NOTE_KEY, note)
     } else {
         console.log(note);
-        note = _createNote(note.info.title,note.type)
+        note = _createNote(note.info.title, note.type)
         return storageAsyncService.post(NOTE_KEY, note)
     }
 }
 
-function saveDuplicateNote(note){
+function saveDuplicateNote(note) {
     console.log(note)
 
     return storageAsyncService.post(NOTE_KEY, note)
@@ -108,9 +109,10 @@ function _createNotes() {
     // notes.push(_createNote('Hola', 'NoteTxt'))
 }
 
-function getEmptyNote(){
+function getEmptyNote() {
     const timestamp = Date.now()
     return {
+        id: utilService.makeId(),
         createdAt: timestamp,
         type: '',
         isPinned: false,
@@ -122,10 +124,9 @@ function getEmptyNote(){
 function _createNote(title, type) {
     console.log('creatnote title ', title);
     const note = getEmptyNote()
-    note.id = utilService.makeId()
     note.info.title = title
-    note.type=type
-    console.log(note );
+    note.type = type
+    console.log(note);
 
     return note
 }

@@ -5,6 +5,7 @@ import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 
 import { NotePreview } from "../cmps/NotePreview.jsx"
+import { utilService } from "../../../services/util.service.js"
 
 export function NoteIndex() {
     // const [searchParams, setSearchParams] = useSearchParams()
@@ -29,6 +30,7 @@ export function NoteIndex() {
     }
 
     function onRemoveNote(noteId) {
+        console.log(noteId);
         noteService.remove(noteId)
             .then(() => {
                 setNotes((prevNotes) => prevNotes.filter(note => note.id !== noteId))
@@ -41,6 +43,34 @@ export function NoteIndex() {
 
             })
     }
+
+    function duplicateNote(noteId) {
+        const noteToDuplicate = notes.find(note => note.id === noteId)
+        if (!noteToDuplicate) return
+
+        const newNote = {
+            ...noteToDuplicate,
+            id: '',
+        }
+
+        console.log('Before state update:', notes)
+
+        noteService.save(newNote)
+        .then(savedDuplicateNote => {
+            setNotes(prevNotes => [...prevNotes, newNote])
+            console.log('After state update:', notes)
+
+
+            console.log(savedDuplicateNote)
+            navigate('/note')
+            showSuccessMsg('note saved successfully')
+        })
+        .catch(err => {
+            console.error('Had issues saving note', err)
+            showErrorMsg('could not save note')
+        })
+    }
+
 
 
 
@@ -56,6 +86,7 @@ export function NoteIndex() {
         <NotePreview
             notes={notes}
             onRemoveNote={onRemoveNote}
+            duplicateNote= {duplicateNote}
         // onUpdateNote={onUpdateNote}
         />
     </section>
