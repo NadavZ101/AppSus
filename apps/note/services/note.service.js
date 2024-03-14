@@ -12,6 +12,7 @@ export const noteService = {
     save,
     getEmptyNote,
     getDefaultFilter,
+    saveDuplicateNote,
     // getFilterFromParams
 }
 
@@ -50,18 +51,21 @@ function remove(noteId) {
 }
 
 function save(note) {
-     console.log(note);
     if (note.id) {
         return storageAsyncService.put(NOTE_KEY, note)
     } else {
-       console.log(note.title);
+        console.log(note);
         note = _createNote(note.info.title,note.type)
         return storageAsyncService.post(NOTE_KEY, note)
     }
 }
 
+function saveDuplicateNote(note){
+    console.log(note)
 
+    return storageAsyncService.post(NOTE_KEY, note)
 
+}
 
 function _createNotes() {
     let notes = storageService.loadFromStorage(NOTE_KEY)
@@ -86,6 +90,7 @@ function _createNotes() {
                 id: 'n103',
                 type: 'NoteTodos',
                 isPinned: false,
+                style: { backgroundColor: '#00d' },
                 info: {
                     title: 'Get my stuff together',
                     todos: [{ txt: 'Driving license', doneAt: null },
