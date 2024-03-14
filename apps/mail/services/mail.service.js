@@ -31,6 +31,7 @@ export const mailService = {
     save,
     getEmptyMail,
     getFormatMonthYear,
+    moveToTrash,
 }
 
 // Debugging 
@@ -43,41 +44,39 @@ function query() {
 }
 
 function get(mailId) {
-    console.log('service-get ->  mailId', mailId)
+    console.log('service get ->  mailId = ', mailId)
     return storageAsyncService.get(MAIL_KEY, mailId)
-        .then(mail => _setNextMailId(mail))
+        .then(mail => _setNextPrevMailId(mail))
 }
 
 function save(mail) {
     let { subject, from, to, body, sentAt } = mail
-    sentAt = Date.now()
-    from = loggedinUser.email
-    console.log('save ', from)
+    console.log(mail)
     if (mail.id) {
         return storageAsyncService.put(MAIL_KEY, mail)
     } else {
+        sentAt = Date.now()
+        from = loggedinUser.email
         mail = _createMail(subject, from, to, body, sentAt)
         return storageAsyncService.post(MAIL_KEY, mail)
     }
 }
-// mail = _createMail(mail.subject, mail.from, mail.to, mail.body, mail.sentAt)
-// _createMail(subject, from, to, body, sentAt)
 
-// function removeFromIndex(emailId) {
-//     console.log(emailId)
-//     query()
-//         .then(emails => {
-//             const newEmails = emails.filter(email => email.id !== emailId)
-//         })
-//     console.log('removeFromIndex - newEmails', newEmails)
-//     return newEmails
-// }
+function moveToTrash(mailId) {
+    console.log(mailId)
+    get(mailId)
+        .then(mail => {
+            mail.removedAt = Date.now()
+            console.log(mail)
+            save(mail)
+        })
+}
 
 function getEmptyMail(id = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {
     return { id, subject, body, isRead, sentAt, removedAt, from, to }
 }
 
-function _setNextMailId(mail) {
+function _setNextPrevMailId(mail) {
     return storageAsyncService.query(MAIL_KEY)
         .then((mails) => {
             const mailIdx = mails.findIndex((currMail) => currMail.id === mail.id)
@@ -112,7 +111,7 @@ function _createMail(subject, from, to, body, sentAt) {
     email.subject = subject
     email.body = body || utilService.makeLorem(70)
     email.sentAt = sentAt || getFormatMonthYear(new Date())
-    console.log('service -> _createEmail -> email', email)
+    // console.log('service -> _createEmail -> email', email)
     return email
 }
 

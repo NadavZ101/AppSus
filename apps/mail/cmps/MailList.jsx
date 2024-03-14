@@ -18,8 +18,12 @@ export function MailList({ mails, onRemoveMail }) {
                 </thead>
                 <tbody>
                     {
-                        mails.map((mail) =>
-                            (< MailPreview key={mail.id} mail={mail} onRemoveMail={onRemoveMail} />))
+                        <React.Fragment>
+                            {
+                                mails.map((mail) =>
+                                    (< MailPreview key={mail.id} mail={mail} onRemoveMail={onRemoveMail} />))
+                            }
+                        </React.Fragment>
                     }
                 </tbody>
             </table>

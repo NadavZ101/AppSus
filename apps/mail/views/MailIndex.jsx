@@ -21,7 +21,7 @@ export function MailIndex() {
         if (!isSentBox) {
             mailService.query()
                 .then(mails => {
-                    const inboxMails = mails.filter(mail => mail.to === 'user@appsus.com')
+                    const inboxMails = mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
                     console.log('inbox = ', inboxMails)
                     setMails(inboxMails)
                 })
@@ -29,7 +29,7 @@ export function MailIndex() {
         } else {
             mailService.query()
                 .then(mails => {
-                    const sentMails = mails.filter(mail => mail.to !== 'user@appsus.com')
+                    const sentMails = mails.filter(mail => mail.to !== 'user@appsus.com' && !mail.removedAt)
                     console.log('sent box = ', sentMails)
                     setMails(sentMails)
                 })
@@ -37,18 +37,13 @@ export function MailIndex() {
     }
 
     function onRemoveMail(mailId) {
-        onToggleToTrash(mailId)
+        mailService.moveToTrash(mailId)
+        // .then(mail => mail.removedAt = Date.now())
         setMails((prevMails) => prevMails.filter(mail => mail.id !== mailId))
+        console.log(mails)
         console.log('Mail removed successfully ')
     }
 
-    function onToggleToTrash(mailId) {
-        mailService.get(mailId)
-            .then(mailToTrash => {
-                mailToTrash.toTrash = true
-                console.log(mailToTrash)
-            })
-    }
     console.log(mails)
 
     if (!mails) return
