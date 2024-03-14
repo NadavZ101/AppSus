@@ -40,7 +40,7 @@ export function NotePreview({ notes, onRemoveNote }) {
 
         noteService.save(newNote)
         .then(savedDuplicateNote => {
-            setNotesState(prevNotes => [...prevNotes, ...newNote])
+            setNotesState(prevNotes => [...prevNotes, newNote])
             console.log('After state update:', notesState)
 
 
@@ -61,10 +61,11 @@ export function NotePreview({ notes, onRemoveNote }) {
 
         {notes.map(note => (
             <React.Fragment>
-                <button className="remove-btn" onClick={() => onRemoveNote(note.id)}>X</button>
-                <button onClick={() => duplicateNote(note.id)}>Duplicate</button>
+                   <button className="remove-btn note-btn" onClick={() => onRemoveNote(note.id)}>X</button>
+                <button className="note-btn" onClick={() => duplicateNote(note.id)}>Duplicate</button>
                 <input
                     type="color"
+                    className="note-btn"
                     name="style.backgroundColor"
                     value={noteColor[note.id] || '#FFFFFF'}
                     onChange={(e) => onSetColor(note.id, e.target.value)}
@@ -73,6 +74,7 @@ export function NotePreview({ notes, onRemoveNote }) {
                 <Link key={note.id} to={`/note/edit/${note.id}`}>
                     
                     <div className="note-display" style={{ backgroundColor: noteColor[note.id] || '#FFFFFF' }}>
+               
                         <span className="note-title">{note.info.title}</span>
                         <span className="note-text">{note.info.txt}</span>
                     </div>

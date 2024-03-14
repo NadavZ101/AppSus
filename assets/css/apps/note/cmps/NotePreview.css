@@ -1,28 +1,45 @@
-* {
-    box-sizing: border-box;
-}
-
 .note-container {
-    padding: 15px;
-    margin: auto;
-    columns: 220px 4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    font-family: open-sans;
 }
 
 .note-display {
     position: relative;
-    background-color: #fff;
-    width: auto;
-    height: 5em;
-    border: 1px solid #e0e0e0;
-    box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
-    padding: 2em;
-    margin-bottom: 0.8em;
-    border-radius: 0.5em;
+    width: 15em;
+    height: auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    min-height: 5em;
+    max-height: 10em;
 }
 
-.note-display .remove-btn {
-    /* position: absolute;
-    right: 0;
-    top: 0; */
-    border: transparent;
+.note-display:hover {
+    transform: translateY(-4px);
+}
+
+.note-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.note-btn{
+ height: 16px;
+ width: 16px;
+ overflow: visible;
+ position: absolute;
+ left: 0;
+ bottom: -1.5em;
+}
+
+.note-display div {
+    font-size: 14px;
+    color: #666666;
 }
