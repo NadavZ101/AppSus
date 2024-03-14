@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link, Outlet, useParams } = ReactRouterDOM
+const { NavLink, Link, Outlet, useNavigate, useParams } = ReactRouterDOM
 
 import { MailList } from "../cmps/MailList.jsx"
 import { MailNavBar } from "../cmps/MailNavBar.jsx"
@@ -9,14 +9,16 @@ export function MailIndex() {
 
     const [mails, setMails] = useState(null)
     const [folderMail, setFolderMail] = useState('inbox')
-    const [isReadMail, setIsReadMail] = useState(false)
+    // const [isReadMail, setIsReadMail] = useState(false)
     const mailId = useParams()
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!mailId.mailId) loadMails()
         else loadMail(mailId.mailId)
-        console.log(mailId)
-    }, [mailId.mailId, isReadMail])
+        console.log(mailId.mailId)
+    }, [mailId.mailId])
 
     function changeFolder() {
         switch (folderMail) {
@@ -73,7 +75,9 @@ export function MailIndex() {
             })
     }
 
+    // 1 function to remove / delete
     function onTrashMail(mailId) {
+        console.log('trash', mailId)
         mailService.moveToTrash(mailId)
         setMails((prevMails) => prevMails.filter(mail => mail.id !== mailId))
         console.log(mails)
@@ -81,29 +85,16 @@ export function MailIndex() {
         // showSuccessMsg(`Mail moved to trash successfully (${mailId})`)
     }
 
-    function onDeleteMail(mailId) {
-        console.log(mailId)
-        mailService.remove(mailId)
-            .then(() => {
-                setMails((prevMails) => prevMails.filter(mail => mail.id !== mailId))
-                console.log('Mail deleted successfully ')
-                // showSuccessMsg(`Mail deleted successfully (${mailId})`)
-            })
-            .catch((err) => {
-                console.log('Couldn\'t delete mail', err)
-                // showErrorMsg(`Couldn\'t delete mail (${mailId})`)
-            })
-    }
 
     function onReadMail(mailId) {
         console.log(mailId)
         mailService.readMail(mailId)
             .then(mail => {
                 console.log(mail)
-                setIsReadMail(...mail, mail.isRead)
+                setMails(mail)
                 console.log(mail)
-
             })
+        navigate(`{/mail/${mailId}`)
     }
 
     console.log(mails)
@@ -113,14 +104,14 @@ export function MailIndex() {
 
         <MailNavBar />
         <nav>
-            <Link to="/mail/:mailId">Read Mail(Details)</Link>
+            <Link to="/mail/:mailId"></Link>
             <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('inbox'))}>Inbox</Link>
             <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('sent'))}>Sent</Link>
             <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('trash'))}>Trash</Link>
             {/* <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link> */}
 
             {/* {isSentBox && */}
-            <MailList mails={mails} onRemoveMail={onTrashMail} onDeleteMail={onDeleteMail} onReadMail={onReadMail} />
+            <MailList mails={mails} onTrashMail={onTrashMail} onDeleteMail={onDeleteMail} onReadMail={onReadMail} />
             {/* } */}
         </nav>
         <Outlet />

@@ -1,18 +1,25 @@
 const { Link } = ReactRouterDOM
 
 
-export function MailPreview({ mail, onRemoveMail, onDeleteMail, onReadMail }) {
+export function MailPreview({ mail, onTrashMail, onDeleteMail, onReadMail }) {
 
-    return <tr className="mail-preview">
-        <Link to={`/mail/${mail.id}`} onClick={() => onReadMail(mail.id)}>
-            <td>{mail.from}</td>
-            <td>{mail.subject}</td>
-            {/* <td>{mail.sentAt}</td> */}
-            <td><button className="remove-btn" onClick={() => onRemoveMail(mail.id)}>Trash</button></td>
-            {/* add trash icon */}
+    function handleMailClick() {
+        onReadMail(mail.id)
+    }
 
-            <td><button className="remove-btn" onClick={() => onDeleteMail(mail.id)}>Delete</button></td>
-            {/* add trash icon */}
-        </Link>
+    function handleTrashClick(ev) {
+        ev.stopPropagation()
+        onTrashMail(mail.id)
+    }
+    // function handleDeleteClick(ev) {
+    //     onDeleteMail(mail.id)
+    // }
+    return <tr className="mail-preview" onClick={handleMailClick}>
+        <td>{mail.from}</td>
+        <td>{mail.subject}</td>
+
+        <td><button className="remove-btn" onClick={handleTrashClick}>Trash</button></td>
+        {/* add trash icon */}
+
     </tr>
 }
