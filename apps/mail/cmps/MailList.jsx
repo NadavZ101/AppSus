@@ -4,7 +4,7 @@ const { useState, useEffect } = React
 import { MailPreview } from "../cmps/MailPreview.jsx"
 
 
-export function MailList({ mails, onTrashMail, onDeleteMail, onReadMail }) {
+export function MailList({ mails, onTrashMail, onReadMail }) {
 
     console.log(mails)
     useEffect(() => {
@@ -19,7 +19,7 @@ export function MailList({ mails, onTrashMail, onDeleteMail, onReadMail }) {
                 <tbody>
                     {
                         mails.map((mail) =>
-                            (< MailPreview key={mail.id} mail={mail} onTrashMail={onTrashMail} onDeleteMail={onDeleteMail} onReadMail={onReadMail} />))
+                            (< MailPreview key={mail.id} mail={mail} onTrashMail={onTrashMail} onReadMail={onReadMail} />))
                     }
                 </tbody>
             </table>

@@ -87,11 +87,11 @@ function remove(mailId) {
 
 function readMail(mailId) {
     console.log(mailId)
-    get(mailId)
+    return get(mailId)
         .then(mail => {
             console.log(mail)
             mail.isRead = true
-            save(mail)
+            return save(mail)
         })
 }
 

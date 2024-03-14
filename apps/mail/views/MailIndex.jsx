@@ -1,5 +1,7 @@
 const { useState, useEffect } = React
-const { NavLink, Link, Outlet, useNavigate, useParams } = ReactRouterDOM
+const { NavLink, Link, Outlet, useParams } = ReactRouterDOM
+const { useNavigate } = ReactRouter
+
 
 import { MailList } from "../cmps/MailList.jsx"
 import { MailNavBar } from "../cmps/MailNavBar.jsx"
@@ -17,6 +19,7 @@ export function MailIndex() {
     useEffect(() => {
         if (!mailId.mailId) loadMails()
         else loadMail(mailId.mailId)
+
         console.log(mailId.mailId)
     }, [mailId.mailId])
 
@@ -90,11 +93,11 @@ export function MailIndex() {
         console.log(mailId)
         mailService.readMail(mailId)
             .then(mail => {
-                console.log(mail)
-                setMails(mail)
-                console.log(mail)
+                loadMail(mailId)
+                // setMails(mail)
+                // console.log(mail)
             })
-        navigate(`{/mail/${mailId}`)
+        // navigate(`{/mail/${mailId}`)
     }
 
     console.log(mails)
@@ -111,7 +114,7 @@ export function MailIndex() {
             {/* <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link> */}
 
             {/* {isSentBox && */}
-            <MailList mails={mails} onTrashMail={onTrashMail} onDeleteMail={onDeleteMail} onReadMail={onReadMail} />
+            <MailList mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} />
             {/* } */}
         </nav>
         <Outlet />
