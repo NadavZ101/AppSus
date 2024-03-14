@@ -4,26 +4,26 @@
     color: red
  }
 
- body {
-    background: var(--mail-bg);
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
  }
 
+ /* Style for the entire table */
  .mails-table {
-    background-color: var(--mail-table-bg);
-    border: 1px solid;
-    border-radius: 0.8em;
-
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
  }
 
- .mails-table *> {
-    flex: 1;
+ /* .mails-table *> {
+    display: flex;
     justify-content: space-between;
- }
+    font-size: .875rem;
+ } */
 
- tr {
-    border: 1px solid black;
- }
-
- td {
+ /* td {
     padding: 0 1em;
- }
+ } */

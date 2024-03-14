@@ -2,4 +2,51 @@
     font-weight: bold;
 }
 
-td:hover {}
+.read-mail {
+    background-color: #C2DBFF;
+}
+
+tr {
+    display: flex;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+    scale: 1.02;
+    cursor: pointer;
+
+    box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
+td {
+    display: flex;
+}
+
+.mail-preview {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.mail-preview:hover {
+    background-color: #f4f4f4;
+}
+
+.mails-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove-btn {
+    /* color: white; */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    scale: 1.02;
+}

@@ -12,7 +12,7 @@ export function MailNavBar() {
     // const closeCompose = () => setIsOnCompose(false)
 
     return <div className="nav-bar flex">
-        <button onClick={() => setIsOnCompose(true)}>Compose</button>
+        <button className="compose-btn" onClick={() => setIsOnCompose(true)}>Compose</button>
         {isOnCompose &&
             <WriteMail setIsOnCompose={() => setIsOnCompose(false)} />
         }

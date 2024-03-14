@@ -1,4 +1,9 @@
 .nav-bar {
+    min-width: 238px;
+    display: column;
+}
+
+.nav-bar-links-container {
+    display: flex;
     flex-direction: column;
-    max-width: 150px;
 }

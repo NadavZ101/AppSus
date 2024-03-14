@@ -105,18 +105,22 @@ export function MailIndex() {
     if (!mails) return
     return <section className="mail-index">
 
+
+        {/* <React.Fragment className="nav-bar-container flex"> */}
         <MailNavBar />
-        <nav>
+        <nav className="nav-bar flex">
+
             <Link to="/mail/:mailId"></Link>
-            <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('inbox'))}>Inbox</Link>
-            <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('sent'))}>Sent</Link>
-            <Link to="/mail/list" onClick={() => changeFolder(setFolderMail('trash'))}>Trash</Link>
+            <Link to="/mail/list" className="nav-bar-links" onClick={() => changeFolder(setFolderMail('inbox'))}>Inbox</Link>
+            <Link to="/mail/list" className="nav-bar-links" onClick={() => changeFolder(setFolderMail('sent'))}>Sent</Link>
+            <Link to="/mail/list" className="nav-bar-links" onClick={() => changeFolder(setFolderMail('trash'))}>Trash</Link>
             {/* <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link> */}
 
             {/* {isSentBox && */}
-            <MailList mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} />
             {/* } */}
         </nav>
+        <MailList mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} />
+        {/* </React.Fragment> */}
         <Outlet />
 
     </section>
