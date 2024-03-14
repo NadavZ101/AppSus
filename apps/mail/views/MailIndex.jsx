@@ -34,7 +34,6 @@ export function MailIndex() {
         }
     }
 
-
     function loadMails() {
         console.log('loadMails')
         if (isSentBox === 'inbox') {
@@ -63,12 +62,26 @@ export function MailIndex() {
         }
     }
 
-    function onRemoveMail(mailId) {
+    function onTrashMail(mailId) {
         mailService.moveToTrash(mailId)
-        // .then(mail => mail.removedAt = Date.now())
         setMails((prevMails) => prevMails.filter(mail => mail.id !== mailId))
         console.log(mails)
-        console.log('Mail removed successfully ')
+        console.log('Mail moved to trash successfully ')
+        // showSuccessMsg(`Mail moved to trash successfully (${mailId})`)
+    }
+
+    function onDeleteMail(mailId) {
+        console.log(mailId)
+        mailService.remove(mailId)
+            .then(() => {
+                setMails((prevMails) => prevMails.filter(mail => mail.id !== mailId))
+                console.log('Mail deleted successfully ')
+                // showSuccessMsg(`Mail deleted successfully (${mailId})`)
+            })
+            .catch((err) => {
+                console.log('Couldn\'t delete mail', err)
+                // showErrorMsg(`Couldn\'t delete mail (${mailId})`)
+            })
     }
 
     console.log(mails)
@@ -85,7 +98,7 @@ export function MailIndex() {
             {/* <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link> */}
 
             {/* {isSentBox && */}
-            <MailList mails={mails} onRemoveMail={onRemoveMail} />
+            <MailList mails={mails} onRemoveMail={onTrashMail} onDeleteMail={onDeleteMail} />
             {/* } */}
         </nav>
         <Outlet />
