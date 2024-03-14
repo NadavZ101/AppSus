@@ -20,6 +20,10 @@
     max-height: 10em;
 }
 
+.unread-mail {
+    font-weight: bold;
+}
+
 .note-display:hover {
     transform: translateY(-4px);
 }
