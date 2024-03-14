@@ -3,15 +3,16 @@
 }
 
 .note-container {
-    column-count: 3;
-    column-gap: 10px;
+    padding: 15px;
+    margin: auto;
+    columns: 220px 4;
 }
 
 .note-display {
     position: relative;
     background-color: #fff;
-    width: 240PX;
-    height: 3em;
+    width: auto;
+    height: 5em;
     border: 1px solid #e0e0e0;
     box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
     padding: 2em;
@@ -20,8 +21,8 @@
 }
 
 .note-display .remove-btn {
-    position: absolute;
+    /* position: absolute;
     right: 0;
-    top: 0;
+    top: 0; */
     border: transparent;
 }

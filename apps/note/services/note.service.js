@@ -33,9 +33,12 @@ function query(filterBy = getDefaultFilter()) {
 }
 
 function getDefaultFilter() {
-    return { title: '', type: 'NoteTxt' }
+    return { 
+        info: { title: '' },
+        type: '' 
+    }
 }
-
+ 
 function get(noteId) {
     return storageAsyncService.get(NOTE_KEY, noteId)
     // .then(car => _setNextPrevCarId(note))
@@ -47,11 +50,12 @@ function remove(noteId) {
 }
 
 function save(note) {
-    console.log(note);
+     console.log(note);
     if (note.id) {
         return storageAsyncService.put(NOTE_KEY, note)
     } else {
-        note = _createNote(note.title,note.type)
+       console.log(note.title);
+        note = _createNote(note.info.title,note.type)
         return storageAsyncService.post(NOTE_KEY, note)
     }
 }
@@ -111,6 +115,7 @@ function getEmptyNote(){
 }
 
 function _createNote(title, type) {
+    console.log('creatnote title ', title);
     const note = getEmptyNote()
     note.id = utilService.makeId()
     note.info.title = title

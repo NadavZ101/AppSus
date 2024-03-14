@@ -47,31 +47,34 @@ export function NoteEdit() {
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
+        console.log(value);
 
         if (field === 'title') {
             const info = { ...noteToEdit.info, [field]: value }
             setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, info }))
             return
-          }
-
-        switch (target.type) {
-            case 'number':
-            case 'range':
-                value = +value || ''
-                break
-
-            case 'checkbox':
-                value = target.checked
-                break
-
-            default:
-                break
         }
+
+        // switch (target.type) {
+        //     case 'number':
+        //     case 'range':
+        //         value = +value || ''
+        //         break
+
+        //     case 'checkbox':
+        //         value = target.checked
+        //         break
+
+        //     default:
+        //         break
+        // }
 
         setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, [field]: value }))
     }
-
+   console.log(noteToEdit);
     const { info, type } = noteToEdit
+    // const {title}= info
+    console.log(info);
 
 
 
