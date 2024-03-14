@@ -30,7 +30,7 @@ export function MailDetails() {
     }
     console.log(mail)
 
-    if (isLoading) return <div>Loading Mail...</div>
+    if (isLoading) return
     return <section className="mail-details">
         <Link to="/mail"><button>←</button></Link> {/* switch to icon */}
 

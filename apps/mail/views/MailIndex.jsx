@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link, Outlet } = ReactRouterDOM
+const { Link, Outlet, useParams } = ReactRouterDOM
 
 import { MailList } from "../cmps/MailList.jsx"
 import { MailNavBar } from "../cmps/MailNavBar.jsx"
@@ -9,42 +9,31 @@ export function MailIndex() {
 
     const [mails, setMails] = useState(null)
     const [isSentBox, setIsSentBox] = useState(false)
+    const mailId = useParams()
 
     useEffect(() => {
-        loadMails()
-    }, [])
+        if (!mailId.mailId) loadMails()
+        console.log(mailId)
+    }, [mailId.mailId])
 
     function loadMails() {
-        // mailService.query()
-        //     .then(mails => {
-        //         setMails(mails)
-        //     })
-
+        console.log('loadMails')
         if (!isSentBox) {
-            console.log('HHH')
-
             mailService.query()
                 .then(mails => {
                     const inboxMails = mails.filter(mail => mail.to === 'user@appsus.com')
-                    console.log(inboxMails)
+                    console.log('inbox = ', inboxMails)
                     setMails(inboxMails)
-
                 })
-            console.log(mails)
 
+        } else {
+            mailService.query()
+                .then(mails => {
+                    const sentMails = mails.filter(mail => mail.to !== 'user@appsus.com')
+                    console.log('sent box = ', sentMails)
+                    setMails(sentMails)
+                })
         }
-    }
-
-
-
-    function showInbox() {
-
-    }
-
-    function sentMailsBox() {
-        setIsSentBox(true)
-        mailService.query()
-            .then(mails => { mails.filter(mail => mail.from !== 'user@appsus.com') })
     }
 
     function onRemoveMail(mailId) {
@@ -60,20 +49,19 @@ export function MailIndex() {
                 console.log(mailToTrash)
             })
     }
-
     console.log(mails)
 
-
-    if (!mails) return <div>Loading emails...</div>
+    if (!mails) return
     return <section className="mail-index">
 
         <MailNavBar />
         <nav>
             <Link to="/mail/:mailId">Read Mail(Details)</Link>
-            <Link to="/mail/list">Sent</Link>
+            <Link to="/mail/list" onClick={() => setIsSentBox(false)}>Inbox</Link>
+            <Link to="/mail/list" onClick={() => setIsSentBox(true)}>Sent</Link>
 
             {/* {isSentBox && */}
-            {/* <MailList mails={mails} onRemoveMail={onRemoveMail} /> */}
+            <MailList mails={mails} onRemoveMail={onRemoveMail} />
             {/* } */}
         </nav>
         <Outlet />
