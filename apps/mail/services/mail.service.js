@@ -19,7 +19,7 @@ const email = {
     to: 'user@appsus.com'
 }
 
-// Basic User
+// Basic user
 const loggedinUser = {
     email: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
@@ -28,6 +28,9 @@ const loggedinUser = {
 export const mailService = {
     query,
     get,
+    save,
+    getEmptyMail,
+    getFormatMonthYear,
 }
 
 // Debugging 
@@ -45,6 +48,21 @@ function get(mailId) {
         .then(mail => _setNextMailId(mail))
 }
 
+function save(mail) {
+    let { subject, from, to, body, sentAt } = mail
+    sentAt = Date.now()
+    from = loggedinUser.email
+    console.log('save ', from)
+    if (mail.id) {
+        return storageAsyncService.put(MAIL_KEY, mail)
+    } else {
+        mail = _createMail(subject, from, to, body, sentAt)
+        return storageAsyncService.post(MAIL_KEY, mail)
+    }
+}
+// mail = _createMail(mail.subject, mail.from, mail.to, mail.body, mail.sentAt)
+// _createMail(subject, from, to, body, sentAt)
+
 // function removeFromIndex(emailId) {
 //     console.log(emailId)
 //     query()
@@ -55,7 +73,7 @@ function get(mailId) {
 //     return newEmails
 // }
 
-function getEmptyEmail(id = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {
+function getEmptyMail(id = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {
     return { id, subject, body, isRead, sentAt, removedAt, from, to }
 }
 
@@ -75,9 +93,9 @@ function _createMails() {
     let emails = storageService.loadFromStorage(MAIL_KEY)
     if (!emails || !emails.length) {
         emails = []
-        emails.push(_createEmail('Hello Haim', loggedinUser.fullname, loggedinUser.email))
-        emails.push(_createEmail('Whats up Nadav?', loggedinUser.fullname, loggedinUser.email))
-        emails.push(_createEmail(' Offer from Nigirian Prince ', loggedinUser.fullname, loggedinUser.email))
+        emails.push(_createMail('Hello Haim', email.from, loggedinUser.email))
+        emails.push(_createMail('Whats up Nadav?', email.from, loggedinUser.email))
+        emails.push(_createMail(' Offer from Nigirian Prince ', email.from, loggedinUser.email))
         console.log('service -> _createMails -> emails', emails)
 
         storageService.saveToStorage(MAIL_KEY, emails)
@@ -85,15 +103,24 @@ function _createMails() {
 
 }
 
-function _createEmail(subject, from, to) {
-    const email = getEmptyEmail()
+function _createMail(subject, from, to, body, sentAt) {
+    console.log(from)
+    const email = getEmptyMail()
     email.id = utilService.makeId()
     email.from = from
     email.to = to
     email.subject = subject
-    email.body = utilService.makeLorem(70)
-    email.sentAt = new Date().getTime()
+    email.body = body || utilService.makeLorem(70)
+    email.sentAt = sentAt || getFormatMonthYear(new Date())
     console.log('service -> _createEmail -> email', email)
     return email
+}
+
+function getFormatMonthYear(date) {
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const month = monthNames[date.getMonth()]
+    const year = date.getFullYear()
+    return `${month}/${year}`
 }
 

@@ -17,7 +17,6 @@ export function MailDetails() {
 
 
     function loadMail() {
-        console.log('HELLO')
         setIsLoading(true)
         mailService.get(params.mailId)
             .then(mail => setMail(mail))

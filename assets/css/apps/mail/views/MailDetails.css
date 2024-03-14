@@ -1,0 +1,9 @@
+.mail-details {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.details-actions {
+    border-radius: 5px;
+}
