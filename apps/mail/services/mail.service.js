@@ -55,6 +55,7 @@ function save(mail) {
     let { subject, from, to, body, sentAt } = mail
 
     if (mail.id) {
+        console.log(mail)
         return storageAsyncService.put(MAIL_KEY, mail)
     } else {
         sentAt = Date.now()
@@ -66,12 +67,17 @@ function save(mail) {
 }
 
 function moveToTrash(mailId) {
-    console.log(mailId)
     get(mailId)
         .then(mail => {
-            mail.removedAt = Date.now()
-            console.log(mail)
-            save(mail)
+            if (mail.removedAt === null) {
+
+                console.log(mail)
+                mail.removedAt = Date.now()
+                console.log(mail)
+                save(mail)
+            } else {
+                remove(mailId)
+            }
         })
 }
 
@@ -81,11 +87,11 @@ function remove(mailId) {
 
 function readMail(mailId) {
     console.log(mailId)
-    get(mailId)
+    return get(mailId)
         .then(mail => {
-            mail.isRead = true
             console.log(mail)
-            save(mail)
+            mail.isRead = true
+            return save(mail)
         })
 }
 
