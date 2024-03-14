@@ -100,8 +100,9 @@ function _createNotes() {
 }
 
 function getEmptyNote(){
+    const timestamp = Date.now()
     return {
-        createdAt: 1112222,
+        createdAt: timestamp,
         type: '',
         isPinned: false,
         style: { backgroundColor: '#00d' },
@@ -114,7 +115,7 @@ function _createNote(title, type) {
     note.id = utilService.makeId()
     note.info.title = title
     note.type=type
-    console.log(note   );
+    console.log(note );
 
     return note
 }

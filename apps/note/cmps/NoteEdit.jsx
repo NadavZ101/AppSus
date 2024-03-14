@@ -48,6 +48,12 @@ export function NoteEdit() {
         const field = target.name
         let value = target.value
 
+        if (field === 'title') {
+            const info = { ...noteToEdit.info, [field]: value }
+            setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, info }))
+            return
+          }
+
         switch (target.type) {
             case 'number':
             case 'range':
@@ -65,7 +71,7 @@ export function NoteEdit() {
         setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, [field]: value }))
     }
 
-    const { title, type } = noteToEdit
+    const { info, type } = noteToEdit
 
 
 
@@ -86,7 +92,7 @@ export function NoteEdit() {
 
                         name="title"
                         onChange={handleChange}
-                        value={title}
+                        value={info.title}
                     />
 
                     <label htmlFor="type">Note type:</label>
