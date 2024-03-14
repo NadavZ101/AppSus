@@ -20,6 +20,10 @@
     border-radius: 0.5em;
 }
 
+.unread-mail {
+    font-weight: bold;
+}
+
 .note-display .remove-btn {
     /* position: absolute;
     right: 0;
