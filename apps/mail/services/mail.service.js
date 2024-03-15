@@ -34,6 +34,7 @@ export const mailService = {
     moveToTrash,
     remove,
     readMail,
+    getFilterFromParams,
 }
 
 // Debugging 
@@ -41,8 +42,39 @@ window.es = mailService
 
 _createMails()
 
-function query() {
+function query(filterBy = getDefaultFilter()) {
+    console.log('filterBy', filterBy)
+
     return storageAsyncService.query(MAIL_KEY)
+        .then(mails => {
+            if (filterBy.subject) {
+                console.log('filterBy', filterBy)
+
+                // const regex = new RegExp(filterBy.subject, 'i')
+                // mails = mails.filter(mail => regex.test(mail.subject))
+                mails = mails.filter(mail => {
+                    mail.subject.toLowerCase() === filterBy.subject.toLowerCase()
+                    console.log(mail)
+                })
+                console.log(mails)
+            }
+            if (filterBy.mailReadingStatus) {
+                mails = mails.filter(mail => mail.isRead === filterBy.mailReadingStatus)
+            }
+            return mails
+        })
+}
+
+function getDefaultFilter() {
+    return { subject: '', mailReadingStatus: false }
+}
+
+function getFilterFromParams(searchParams = {}) {
+    const defaultFilter = getDefaultFilter()
+    return {
+        subject: searchParams.get('subject') || defaultFilter.subject,
+        mailReadingStatus: searchParams.get('mailStatus') || defaultFilter.mailReadingStatus
+    }
 }
 
 function get(mailId) {
