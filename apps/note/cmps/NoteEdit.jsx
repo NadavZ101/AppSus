@@ -72,9 +72,9 @@ export function NoteEdit() {
         setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, [field]: value }))
     }
    console.log(noteToEdit);
-    const { info, type } = noteToEdit
+    const { title, type } = noteToEdit
     // const {title}= info
-    console.log(info);
+    console.log(title);
 
 
 
@@ -95,7 +95,7 @@ export function NoteEdit() {
 
                         name="title"
                         onChange={handleChange}
-                        value={info.title}
+                        value={title|| 'e'}
                     />
 
                     <label htmlFor="type">Note type:</label>

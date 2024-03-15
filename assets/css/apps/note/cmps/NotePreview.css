@@ -1,51 +1,79 @@
 .note-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
-    font-family: open-sans;
+    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
 .note-display {
     position: relative;
-    width: 15em;
+    width: 240px;
     height: auto;
-    background-color: #ffffff;
-    border-radius: 0.5em;
+    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 16px;
     cursor: pointer;
     transition: transform 0.2s ease;
-    min-height: 5em;
-    max-height: 10em;
+    min-height: 100px;
+    z-index: 1;
+
 }
 
 .note-display:hover {
     transform: translateY(-4px);
-
 }
 
 .note-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
-    color: #333333;
+    color: #202124;
+    margin-bottom: 8px;
 }
 
-.note-btn{
- height: 2em;
- width: 2em;
- overflow: visible;
-display: block;
- left: 0;
- bottom: -1.5em;
+.note-content {
+    font-size: 12px;
+    color: #5f6368;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.note-display:hover.note-btn{
+.actions-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    height: 24px;
+    width: 24px;
+    background: none;
+    border: none;
+    padding: 0; 
+    display: none;
+    z-index: 10;
+}
+
+.note-display:hover .actions-btn {
     display: block;
-
 }
 
-.note-display div {
-    font-size: 0.9em;
-    color: #666666;
-}
+/* .pin-btn{
+    display: none;
+    background-color: rgb(212, 17, 17);
+  } */
+  /* .note-display:hover .pin-btn{
+    display: block;
+    height: 32px;
+    width:32px;
+    border-radius: 50%;
+    padding-top: 5px;
+    border-style: none;
+    justify-self: end;
+    align-self: flex-end;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .pin-btn:hover{
+    background-color: rgb(233, 229, 229);
+  } */

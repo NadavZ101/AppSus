@@ -105,11 +105,10 @@ export function NoteIndex() {
     if (!notes) return <div>loading...</div>
 
     return <section className="note-index">
-        <div>note app</div>
         <NoteFilter
             onSetFilter={onSetFilter}
             filterBy={{ title, type }} />
-        <Link to="/note/edit"><button>Add a Note</button></Link>
+        <Link to="/note/edit"><button className="add-btn"><i class="fa-regular fa-square-plus"></i></button></Link>
 
         <NotePreview
             notes={notes}

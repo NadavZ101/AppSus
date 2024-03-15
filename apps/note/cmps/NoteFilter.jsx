@@ -24,26 +24,25 @@ export function NoteFilter({ onSetFilter, filterBy }) {
 
 
     return <section className="note-filter">
-        <h2>Search</h2>
 
         <form onSubmit={onFilter}>
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title"></label>
             <input type="text"
                 id="title"
                 name="title"
                 value={filterByToEdit.title}
                 onChange={handleChange}
-                placeholder="By title" />
+                placeholder="Search" />
 
-            <label htmlFor="type">Note type</label>
+            {/* <label htmlFor="type"></label>
             <input type="text"
                 id="type"
                 name="type"
                 value={filterByToEdit.type}
                 onChange={handleChange}
-                placeholder="By note type" />
+                placeholder=" note type" /> */}
 
-            <button>Search</button>
+            {/* <button>Search</button> */}
         </form>
     </section>
 }
