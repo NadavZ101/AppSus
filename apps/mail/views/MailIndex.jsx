@@ -14,7 +14,7 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [unreadMails, setUnreadMails] = useState(null)
     const [folderMail, setFolderMail] = useState('inbox')
-    // const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
+    const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
     const mailId = useParams()
 
     // console.log(filterBy)
@@ -31,7 +31,7 @@ export function MailIndex() {
 
         onCountUnreadMails()
 
-    }, [folderMail, mailId.mailId])
+    }, [folderMail, mailId.mailId, filterBy])
 
     function changeFolder(selectedFolder) {
         console.log('selected folder ', selectedFolder)
@@ -63,7 +63,7 @@ export function MailIndex() {
     function loadMails() {
         console.log('Loading mails for folder:', folderMail)
         if (folderMail === 'inbox') {
-            mailService.query()
+            mailService.query(filterBy)
                 .then(mails => {
                     const inboxMails = mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
                     console.log('inbox = ', inboxMails)
@@ -71,7 +71,7 @@ export function MailIndex() {
                 })
 
         } else if (folderMail === 'sent') {
-            mailService.query()
+            mailService.query(filterBy)
                 .then(mails => {
                     const sentMails = mails.filter(mail => mail.to !== 'user@appsus.com' && !mail.removedAt)
                     console.log('sent box = ', sentMails)
@@ -79,7 +79,7 @@ export function MailIndex() {
                 })
 
         } else if (folderMail === 'trash') {
-            mailService.query()
+            mailService.query(filterBy)
                 .then(mails => {
                     const trashMails = mails.filter(mail => mail.removedAt)
                     console.log('trash box = ', trashMails)
@@ -138,7 +138,7 @@ export function MailIndex() {
     if (!mails) return
     return <section className="mail-index">
 
-        {/* <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} /> */}
+        <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
 
         <MailNavBar />
         {/*  */}
