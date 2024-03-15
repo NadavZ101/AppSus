@@ -10,8 +10,8 @@ import { mailService } from "./../services/mail.service.js"
 export function MailIndex() {
 
     const [mails, setMails] = useState(null)
+    const [unreadMails, setUnreadMails] = useState(null)
     const [folderMail, setFolderMail] = useState('inbox')
-    // const [isReadMail, setIsReadMail] = useState(false)
     const mailId = useParams()
 
     const navigate = useNavigate()
@@ -19,7 +19,7 @@ export function MailIndex() {
     useEffect(() => {
         if (!mailId.mailId) loadMails()
         else loadMail(mailId.mailId)
-
+        onCountUnreadMails()
         console.log(mailId.mailId)
     }, [mailId.mailId])
 
@@ -78,7 +78,6 @@ export function MailIndex() {
             })
     }
 
-    // 1 function to remove / delete
     function onTrashMail(mailId) {
         console.log('trash', mailId)
         mailService.moveToTrash(mailId)
@@ -94,14 +93,26 @@ export function MailIndex() {
         mailService.readMail(mailId)
             .then(mail => {
                 loadMail(mailId)
+                onCountUnreadMails()
+
                 // setMails(mail)
                 // console.log(mail)
             })
         // navigate(`{/mail/${mailId}`)
     }
 
-    console.log(mails)
+    function onCountUnreadMails() {
+        mailService.query()
+            .then(mails => {
 
+                const unreadCount = mails.filter(mail => !mail.isRead)
+                console.log(unreadCount)
+                setUnreadMails(unreadCount)
+            })
+    }
+
+    console.log(mails)
+    // ({unreadMails.length})
     if (!mails) return
     return <section className="mail-index">
 
@@ -111,11 +122,11 @@ export function MailIndex() {
         <nav className="sidebar-menu flex">
 
             <Link to="/mail/:mailId"></Link>
-            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder(setFolderMail('inbox'))}>Inbox</Link>
+            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder(setFolderMail('inbox'))}>Inbox({unreadMails.length})</Link>
             <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder(setFolderMail('sent'))}>Sent</Link>
             <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder(setFolderMail('trash'))}>Trash</Link>
 
-            <MailList mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} />
+            <MailList mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} onCountUnreadMails={onCountUnreadMails} />
         </nav>
         {/* </React.Fragment> */}
         <Outlet />

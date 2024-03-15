@@ -1,9 +1,9 @@
 const { useNavigate } = ReactRouter
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fontawesome/react-fontawesome'
+import { faTrash } from '@fontawesome/free-regular-svg-icons'
 
-export function MailPreview({ mail, onTrashMail, onReadMail }) {
+export function MailPreview({ mail, onTrashMail, onReadMail, onCountUnreadMails }) {
 
     const navigate = useNavigate()
 
@@ -14,6 +14,7 @@ export function MailPreview({ mail, onTrashMail, onReadMail }) {
 
     function handleMailClick() {
         onReadMail(mail.id)
+        onCountUnreadMails()
         navigate(`/mail/${mail.id}`)
     }
 
@@ -27,7 +28,7 @@ export function MailPreview({ mail, onTrashMail, onReadMail }) {
         <td>{mail.subject}</td>
 
         <td><button className="remove-btn" onClick={handleTrashClick}>
-            <i class="fa-regular fa-trash"></i>
+            <i className="fa-solid fa-trash"></i>
         </button>
         </td>
         {/* add trash icon */}
