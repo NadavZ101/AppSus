@@ -8,7 +8,7 @@ export function MailPreview({ mail, onTrashMail, onReadMail, onCountUnreadMails 
     const navigate = useNavigate()
 
     function setUnReadClass() {
-        if (mail.isRead === false) return 'unread-mail'
+        if (mail.to === 'user@appsus.com' && mail.isRead === false) return 'unread-mail'
         else return 'read-mail'
     }
 

@@ -1,11 +1,8 @@
 const { useState, useEffect } = React
 
 export function MailFilter({ onSetFilter, filterBy }) {
-    console.log(filterBy)
 
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-
-    console.log(filterByToEdit)
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
@@ -35,8 +32,8 @@ export function MailFilter({ onSetFilter, filterBy }) {
                 placeholder="Search in Email"
             />
             {/* <input type="checkbox"
-                id="mailReadingStatus"
-                name="mailReadingStatus"
+                id="isRead"
+                name="isRead"
                 onChange={handleChange}
                 value={filterByToEdit.mailReadingStatus}
                 placeholder="Search in Email"

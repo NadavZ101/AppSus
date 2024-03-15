@@ -34,6 +34,7 @@ export const mailService = {
     moveToTrash,
     remove,
     readMail,
+    // getDefaultFilter,
     getFilterFromParams,
 }
 
@@ -42,33 +43,48 @@ window.es = mailService
 
 _createMails()
 
-function query(filterBy = getDefaultFilter()) {
-    console.log('filterBy', filterBy)
+// function query(filterBy = getDefaultFilter()) {
+//     console.log('filterBy', filterBy)
 
+//     return storageAsyncService.query(MAIL_KEY)
+//         .then(mails => {
+//             if (filterBy.subject) {
+//                 console.log('filterBy', filterBy)
+
+//                 const regex = new RegExp(filterBy.subject, 'i')
+//                 mails = mails.filter(mail => regex.test(mail.subject))
+
+//                 console.log(mails)
+//             }
+//             if (filterBy.isRead) {
+//                 const statusBool = filterBy.isRead === 'true'
+//                 mails = mails.filter(mail =>
+//                     mail.isRead === statusBool)
+//             } else {
+//                 const statusBool = filterBy.isRead === 'false'
+//                 mails = mails.filter(mail =>
+//                     mail.isRead === statusBool)
+//             }
+//             if (filterBy.removedAt) {
+//                 mails = mails.filter(mail => {
+//                     return mail.removedAt !== null
+//                 })
+//             }
+//             if (filterBy.sentAt) {
+//                 mails = mails.filter(mail => {
+//                     return mail.sentAt !== null || mail.sentAt !== ''
+//                 })
+//             }
+//             return mails
+//         })
+// }
+
+function query() {
     return storageAsyncService.query(MAIL_KEY)
-        .then(mails => {
-            if (filterBy.subject) {
-                console.log('filterBy', filterBy)
-
-                const regex = new RegExp(filterBy.subject, 'i')
-                mails = mails.filter(mail => regex.test(mail.subject))
-
-                console.log(mails)
-            }
-            if (filterBy.mailReadingStatus) {
-                mails = mails.filter(mail => {
-                    console.log(mail.isRead)
-                    console.log(filterBy.mailReadingStatus)
-                    mail.isRead === filterBy.mailReadingStatus
-                })
-
-            }
-            return mails
-        })
 }
 
 function getDefaultFilter() {
-    return { subject: '', mailReadingStatus: false }
+    return { subject: '', isRead: false, removedAt: null, sentAt: null }
 }
 
 function getFilterFromParams(searchParams = {}) {

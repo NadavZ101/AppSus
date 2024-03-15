@@ -14,15 +14,16 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [unreadMails, setUnreadMails] = useState(null)
     const [folderMail, setFolderMail] = useState('inbox')
-    const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
+    // const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
     const mailId = useParams()
 
-    console.log(filterBy)
+    // console.log(filterBy)
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        setSearchParams(filterBy)
+        // setSearchParams(filterBy)
+        console.log('FolderMail state updated to:', folderMail)
 
         if (!mailId.mailId) loadMails()
         else loadMail(mailId.mailId)
@@ -30,30 +31,39 @@ export function MailIndex() {
 
         onCountUnreadMails()
 
-    }, [mailId.mailId, filterBy])
+    }, [folderMail, mailId.mailId])
 
-    function changeFolder() {
-        switch (folderMail) {
-            case 'inbox':
-                value = 'inbox'
-                break
-            case 'sent':
-                value = 'sent'
-                break
-            case 'trash':
-                value = 'trash'
-                break
-            case 'draft':
-                value = 'draft'
-            default:
-                break
-        }
+    function changeFolder(selectedFolder) {
+        console.log('selected folder ', selectedFolder)
+        // setFolderMail(selectedFolder)
+        // console.log('Folder changed to:', folderMail)
+        setFolderMail(selectedFolder)
+        console.log('folderMail =  ', folderMail)
+
+        // setFilterBy({ ...filterBy, folderMail: selectedFolder })
     }
 
+
+    // function loadMails(folder) {
+    //     console.log('Loading mails for folder:', folder)
+    //     mailService.query(filterBy).then(mails => {
+    //         let filteredMails
+    //         if (folder === 'inbox') {
+    //             filteredMails = mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
+    //         } else if (folder === 'sent') {
+    //             filteredMails = mails.filter(mail => mail.from === 'user@appsus.com' && !mail.removedAt)
+    //         } else if (folder === 'trash') {
+    //             filteredMails = mails.filter(mail => mail.removedAt)
+    //         }
+    //         console.log(`${folder} = `, filteredMails)
+    //         setMails(filteredMails)
+    //     })
+    // }
+
     function loadMails() {
-        console.log('loadMails')
+        console.log('Loading mails for folder:', folderMail)
         if (folderMail === 'inbox') {
-            mailService.query(filterBy)
+            mailService.query()
                 .then(mails => {
                     const inboxMails = mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
                     console.log('inbox = ', inboxMails)
@@ -61,7 +71,7 @@ export function MailIndex() {
                 })
 
         } else if (folderMail === 'sent') {
-            mailService.query(filterBy)
+            mailService.query()
                 .then(mails => {
                     const sentMails = mails.filter(mail => mail.to !== 'user@appsus.com' && !mail.removedAt)
                     console.log('sent box = ', sentMails)
@@ -69,7 +79,7 @@ export function MailIndex() {
                 })
 
         } else if (folderMail === 'trash') {
-            mailService.query(filterBy)
+            mailService.query()
                 .then(mails => {
                     const trashMails = mails.filter(mail => mail.removedAt)
                     console.log('trash box = ', trashMails)
@@ -104,8 +114,6 @@ export function MailIndex() {
                 loadMail(mailId)
                 onCountUnreadMails()
 
-                // setMails(mail)
-                // console.log(mail)
             })
         // navigate(`{/mail/${mailId}`)
     }
@@ -113,10 +121,9 @@ export function MailIndex() {
     function onCountUnreadMails() {
         mailService.query()
             .then(mails => {
-
-                const unreadCount = mails.filter(mail => !mail.isRead)
-                console.log(unreadCount)
-                setUnreadMails(unreadCount)
+                const unreadCount = mails.filter(mail => !mail.isRead && mail.to === 'user@appsus.com')
+                console.log(unreadCount.length)
+                setUnreadMails(unreadCount.length > 0 ? unreadCount : [])
             })
     }
 
@@ -131,25 +138,28 @@ export function MailIndex() {
     if (!mails) return
     return <section className="mail-index">
 
-        <MailFilter
-            onSetFilter={onSetFilter}
-            filterBy={filterBy}
-        />
+        {/* <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} /> */}
 
         <MailNavBar />
+        {/*  */}
         <nav className="sidebar-menu flex">
 
-            {/* <Link to="/mail/:mailId"></Link> */}
-            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder(setFolderMail('inbox'))}>Inbox({unreadMails.length})</Link>
-            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder(setFolderMail('sent'))}>Sent</Link>
-            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder(setFolderMail('trash'))}>Trash</Link>
+            <Link to="/mail/:mailId"></Link>
+            <Link to="#" onClick={() => { changeFolder('inbox') }}>Inbox ({unreadMails.length})</Link>
+            <Link to="#" onClick={() => { changeFolder('sent') }}>Sent</Link>
+            <Link to="#" onClick={() => { changeFolder('trash') }}>Trash</Link>
+            {/* <Link to="#" onClick={() => { changeFolder('unread') }}>Unread Mails </Link> */}
+
 
             <MailList mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} onCountUnreadMails={onCountUnreadMails} />
         </nav>
         {/* </React.Fragment> */}
         <Outlet />
-
     </section>
 
 }
+
+{/* <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder('inbox')}>Inbox({unreadMails.length})</Link>
+            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder('sent')}>Sent</Link>
+            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder('trash')}>Trash</Link> */}
 
