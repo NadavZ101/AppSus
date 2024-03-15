@@ -50,16 +50,18 @@ function query(filterBy = getDefaultFilter()) {
             if (filterBy.subject) {
                 console.log('filterBy', filterBy)
 
-                // const regex = new RegExp(filterBy.subject, 'i')
-                // mails = mails.filter(mail => regex.test(mail.subject))
-                mails = mails.filter(mail => {
-                    mail.subject.toLowerCase() === filterBy.subject.toLowerCase()
-                    console.log(mail)
-                })
+                const regex = new RegExp(filterBy.subject, 'i')
+                mails = mails.filter(mail => regex.test(mail.subject))
+
                 console.log(mails)
             }
             if (filterBy.mailReadingStatus) {
-                mails = mails.filter(mail => mail.isRead === filterBy.mailReadingStatus)
+                mails = mails.filter(mail => {
+                    console.log(mail.isRead)
+                    console.log(filterBy.mailReadingStatus)
+                    mail.isRead === filterBy.mailReadingStatus
+                })
+
             }
             return mails
         })
@@ -73,7 +75,7 @@ function getFilterFromParams(searchParams = {}) {
     const defaultFilter = getDefaultFilter()
     return {
         subject: searchParams.get('subject') || defaultFilter.subject,
-        mailReadingStatus: searchParams.get('mailStatus') || defaultFilter.mailReadingStatus
+        // mailReadingStatus: searchParams.get('mailStatus') || defaultFilter.mailReadingStatus
     }
 }
 

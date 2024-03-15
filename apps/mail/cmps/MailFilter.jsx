@@ -34,13 +34,13 @@ export function MailFilter({ onSetFilter, filterBy }) {
                 value={filterByToEdit.subject}
                 placeholder="Search in Email"
             />
-            <input type="checkbox"
+            {/* <input type="checkbox"
                 id="mailReadingStatus"
                 name="mailReadingStatus"
                 onChange={handleChange}
                 value={filterByToEdit.mailReadingStatus}
                 placeholder="Search in Email"
-            />
+            /> */}
         </form>
     </section>
 }
