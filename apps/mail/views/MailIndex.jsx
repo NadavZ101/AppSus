@@ -22,7 +22,7 @@ export function MailIndex() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        // setSearchParams(filterBy)
+        setSearchParams(filterBy)
         console.log('FolderMail state updated to:', folderMail)
 
         if (!mailId.mailId) loadMails()
@@ -135,7 +135,7 @@ export function MailIndex() {
 
     console.log(mails)
 
-    if (!mails) return
+    if (!mails) return <div>Loading Mails...</div>
     return <section className="mail-index">
 
         <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />

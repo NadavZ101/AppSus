@@ -50,18 +50,14 @@ function query(filterBy = getDefaultFilter()) {
         .then(mails => {
             if (filterBy.subject) {
                 console.log('filterBy', filterBy)
-
+                console.log('HEHEHEHE')
                 const regex = new RegExp(filterBy.subject, 'i')
                 mails = mails.filter(mail => regex.test(mail.subject))
 
                 console.log(mails)
             }
-            if (filterBy.isRead) {
+            if (filterBy.isRead !== undefined) {
                 const statusBool = filterBy.isRead === 'true'
-                mails = mails.filter(mail =>
-                    mail.isRead === statusBool)
-            } else {
-                const statusBool = filterBy.isRead === 'false'
                 mails = mails.filter(mail =>
                     mail.isRead === statusBool)
             }
@@ -75,6 +71,7 @@ function query(filterBy = getDefaultFilter()) {
                     return mail.sentAt !== null || mail.sentAt !== ''
                 })
             }
+            console.log(mails)
             return mails
         })
 }
