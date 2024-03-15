@@ -1,10 +1,10 @@
-tr .unread-mail {
+tr.unread-mail {
     font-weight: bold;
     background-color: #CEE4F6;
 }
 
-tr .read-mail {
-    background-color: #BCD8E6;
+tr.read-mail {
+    background-color: #E6F1F2;
 }
 
 tr {
