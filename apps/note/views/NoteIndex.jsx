@@ -3,9 +3,10 @@ const { Link, useSearchParams } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
+import { utilService } from "../../../services/util.service.js"
 
 import { NotePreview } from "../cmps/NotePreview.jsx"
-import { utilService } from "../../../services/util.service.js"
+import { NoteFilter } from "../cmps/NoteFilter.jsx"
 
 export function NoteIndex() {
     // const [searchParams, setSearchParams] = useSearchParams()
@@ -53,40 +54,69 @@ export function NoteIndex() {
             id: '',
         }
 
-        console.log('Before state update:', notes)
-
         noteService.save(newNote)
-        .then(savedDuplicateNote => {
-            setNotes(prevNotes => [...prevNotes, newNote])
-            console.log('After state update:', notes)
+            .then(savedDuplicateNote => {
+                setNotes(prevNotes => [...prevNotes, newNote])
 
+                navigate('/note')
+                showSuccessMsg('note saved successfully')
+            })
+            .catch(err => {
+                console.error('Had issues saving note', err)
+                showErrorMsg('could not save note')
+            })
+    }
 
-            console.log(savedDuplicateNote)
-            navigate('/note')
-            showSuccessMsg('note saved successfully')
-        })
-        .catch(err => {
-            console.error('Had issues saving note', err)
-            showErrorMsg('could not save note')
-        })
+    function onPinnedNote(noteId) {
+        const noteToPin = notes.find(note => note.id === noteId)
+
+        noteToPin.isPinned = !noteToPin.isPinned
+
+        const filteredNotes = notes.filter(note => note.id !== noteId)
+
+        const updatedNotes = noteToPin.isPinned ? [noteToPin, ...filteredNotes] : [...filteredNotes, noteToPin]
+
+        setNotes(updatedNotes)
     }
 
 
+    function onSetColor(noteId, color) {
+        console.log(color)
+        console.log(noteId)
 
+        const updatedNote = notes.find(note => note.id === noteId)
 
+        if (updatedNote) {
+            updatedNote.style = { ...updatedNote.style, backgroundColor: color }
 
+            noteService.save(updatedNote)
+                .then(savedNoteColor => {
+                    setNotes(prevNotes => prevNotes.map(note => note.id === noteId ? savedNoteColor : note))
+                    console.log('Updated note:', savedNoteColor)
+                })
+                .catch(error => {
+                    console.error('Error saving color:', error)
+                })
+        }
+    }
 
-
+    const { title, type } = filterBy
+    console.log(filterBy);
     if (!notes) return <div>loading...</div>
 
-    return <section>
+    return <section className="note-index">
         <div>note app</div>
+        <NoteFilter
+            onSetFilter={onSetFilter}
+            filterBy={{ title, type }} />
         <Link to="/note/edit"><button>Add a Note</button></Link>
 
         <NotePreview
             notes={notes}
             onRemoveNote={onRemoveNote}
-            duplicateNote= {duplicateNote}
+            duplicateNote={duplicateNote}
+            onSetColor={onSetColor}
+            onPinnedNote={onPinnedNote}
         // onUpdateNote={onUpdateNote}
         />
     </section>

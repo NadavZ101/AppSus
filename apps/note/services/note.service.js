@@ -18,15 +18,16 @@ export const noteService = {
 
 function query(filterBy = getDefaultFilter()) {
     console.log('filterBy', filterBy)
+    const regex = new RegExp(filterBy.title, 'i')
+
 
     return storageAsyncService.query(NOTE_KEY)
         .then(notes => {
-            if (filterBy.txt) {
-                const regex = new RegExp(filterBy.title, 'i')
+            if (filterBy.title) {
                 notes = notes.filter(note => regex.test(note.info.title))
             }
             if (filterBy.type) {
-                notes = notes.filter(note => note.type)
+                notes = notes.filter(note => regex.test(note.type))
             }
 
             return notes
@@ -35,19 +36,18 @@ function query(filterBy = getDefaultFilter()) {
 
 function getDefaultFilter() {
     return {
-        info: { title: '' },
+        title: '' ,
         type: ''
     }
 }
 
 function get(noteId) {
     return storageAsyncService.get(NOTE_KEY, noteId)
-    // .then(car => _setNextPrevCarId(note))
-    // return axios.get(CAR_KEY, carId)
+ 
 }
 
 function remove(noteId) {
-    console.log(noteId);
+    console.log(noteId)
     return storageAsyncService.remove(NOTE_KEY, noteId)
 }
 
@@ -77,7 +77,7 @@ function _createNotes() {
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
-                style: { backgroundColor: '#00d' },
+                style: { backgroundColor: '#FFFFFF' },
                 info: { title: 'Sprint3', txt: 'Fullstack Me Baby!' }
             },
             {
@@ -85,13 +85,13 @@ function _createNotes() {
                 type: 'NoteImg',
                 isPinned: false,
                 info: { url: 'http://some-img/me', title: 'Bobi and Me' },
-                style: { backgroundColor: '#00d' }
+                style: { backgroundColor: '##FFFFFF' }
             },
             {
                 id: 'n103',
                 type: 'NoteTodos',
                 isPinned: false,
-                style: { backgroundColor: '#00d' },
+                style: { backgroundColor: '#FFFFFF' },
                 info: {
                     title: 'Get my stuff together',
                     todos: [{ txt: 'Driving license', doneAt: null },
@@ -116,7 +116,7 @@ function getEmptyNote() {
         createdAt: timestamp,
         type: '',
         isPinned: false,
-        style: { backgroundColor: '#00d' },
+        style: { backgroundColor: '' },
         info: { title: '', txt: '' }
     }
 }
