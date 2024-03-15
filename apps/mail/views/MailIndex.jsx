@@ -78,7 +78,6 @@ export function MailIndex() {
             })
     }
 
-    // 1 function to remove / delete
     function onTrashMail(mailId) {
         console.log('trash', mailId)
         mailService.moveToTrash(mailId)
