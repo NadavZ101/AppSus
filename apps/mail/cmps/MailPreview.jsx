@@ -22,12 +22,12 @@ export function MailPreview({ mail, onTrashMail, onReadMail }) {
         onTrashMail(mail.id)
     }
 
-    return <tr className="mail-preview flex" onClick={handleMailClick}>
-        <td className={setUnReadClass()}>{mail.from}</td>
-        <td className={setUnReadClass()}>{mail.subject}</td>
+    return <tr className={`mail-preview flex ${setUnReadClass()}`} onClick={handleMailClick}>
+        <td >{mail.from}</td>
+        <td>{mail.subject}</td>
 
         <td><button className="remove-btn" onClick={handleTrashClick}>
-            {/* <FontAwesomeIcon icon={faTrash} /> */}
+            <i class="fa-regular fa-trash"></i>
         </button>
         </td>
         {/* add trash icon */}

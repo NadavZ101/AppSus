@@ -1,13 +1,16 @@
-.unread-mail {
+tr .unread-mail {
     font-weight: bold;
+    background-color: #CEE4F6;
 }
 
-.read-mail {
-    background-color: #C2DBFF;
+tr .read-mail {
+    background-color: #BCD8E6;
 }
 
 tr {
     display: flex;
+    justify-content: space-between;
+    background-color: #DFE3E8
 }
 
 tr:hover {
@@ -36,7 +39,6 @@ td {
 
 .mails-table td {
     padding: 10px;
-    border-bottom: 1px solid #ddd;
 }
 
 .remove-btn {

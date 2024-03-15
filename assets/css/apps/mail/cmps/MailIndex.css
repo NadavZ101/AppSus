@@ -1,26 +1,9 @@
 .nav-bar-container {}
 
-.compose-btn {
-    border-radius: 1em;
-    color: #5f6368;
-    height: 56px;
-    padding: 0 0 0 24px;
-    min-width: 96px;
-}
 
-.nav-bar-links-container {
-    display: flex;
-}
-
-
-.sidebar-menu a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar-menu a:hover {
-    background-color: #ddd;
+.modal {
+    top: 100px;
+    width: 300px;
+    height: 300px;
+    justify-content: center;
 }

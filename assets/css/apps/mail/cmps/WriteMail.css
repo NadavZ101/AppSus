@@ -1,0 +1,117 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Container */
+.modal {
+    background-color: white;
+    width: 600px;
+    height: 400px;
+    /* Adjust as needed */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+/* Modal Content (Form) */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input Fields */
+.input-container {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ECEFF1;
+}
+
+/* Label */
+.input-container label {
+    margin-bottom: 5px;
+    font-size: .875rem;
+
+    font-family: open-sans, sans-serif;
+    /* font-weight: bold; */
+}
+
+/* Text Input */
+.input-container input[name="subject"],
+.input-container input[type="email"] {
+
+    width: 100%;
+    padding: 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+
+/* .input-container input[name="body"] {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    /* padding: 8px; */
+/* border: 1px solid #ccc;
+    border-radius: 4px;
+}
+     */
+
+
+.input-container textarea {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    box-sizing: border-box;
+    padding: 10px;
+    /* Slightly more padding for better text entry space */
+    border: 1px solid #ccc;
+    /* Subtle border color */
+    border-radius: 4px;
+    /* Rounded corners */
+    background-color: #f8f9fa;
+    /* Light background color */
+    font-family: 'Roboto', 'Arial', sans-serif;
+    /* Clean, readable font */
+    font-size: 1rem;
+    /* Adequate font size for readability */
+}
+
+
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    margin-right: 10px;
+    max-width: 50px;
+    background-color: #0b57d0;
+    /* Gmail's blue color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 18px;
+    border-top-left-radius: 0;
+}
+
+.btn:hover {
+    box-shadow: 0 1px 2px 0 rgba(26, 115, 232, 0.451), 0 1px 3px 1px rgba(26, 115, 232, 0.302);
+
+}
+
+.close-btn {
+    height: 1em;
+    width: 1em;
+}

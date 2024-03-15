@@ -13,7 +13,7 @@ export function MailList({ mails, onTrashMail, onReadMail }) {
 
     return <div>
         {
-            <table className="mails-table flex">
+            <table className="mails-table">
                 <thead>
                 </thead>
                 <tbody>
