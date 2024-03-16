@@ -15,8 +15,16 @@
     height: 40px
 }
 
-.filter {
+.mail-filter {
     grid-area: filter;
+    display: flex;
+    max-width: 580px;
+    flex: 1 1 auto;
+}
+
+form .mail-filter input {
+
+    max-width: 580px;
 }
 
 .compose-btn {
@@ -28,7 +36,6 @@
     font-family: roboto;
     flex-direction: column;
 }
-
 
 .mails-list {
     grid-area: mails-list;

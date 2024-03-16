@@ -2,6 +2,19 @@
 
     .mail-preview {
         height: 80px;
-        /* flex-wrap: wrap; */
+    }
+
+    .modal {
+        flex-direction: column;
+        left: 5px;
+        top: 10px;
+
+        background-color: white;
+        width: auto;
+        height: 385px;
+    }
+
+    .send-btn {
+        bottom: 170px;
     }
 }

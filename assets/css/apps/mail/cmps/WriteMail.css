@@ -15,6 +15,7 @@
 
 .modal {
     position: fixed;
+    flex-direction: column;
     right: 20px;
     bottom: 10px;
 
@@ -35,37 +36,32 @@
     align-items: center;
     height: 40px;
     background-color: #F2F6FC;
+    margin-bottom: 3px;
 }
 
 .modal-header-txt {
     padding: 0 15px;
 }
 
-/* Input Fields */
 .input-container {
     margin-bottom: 9px;
     border-bottom: 1px solid #ECEFF1;
     padding: 0 15px;
-
 }
 
-/* Label */
 .input-container label {
     margin-bottom: 5px;
     font-size: .875rem;
 
     font-family: open-sans, sans-serif;
-    /* font-weight: bold; */
 }
 
-/* Text Input */
 .input-container input[name="subject"],
 .input-container input[type="email"] {
-
     width: 100%;
     height: 2em;
     padding-left: 1em;
-
+    background-color: transparent;
     border: 1px solid transparent;
     border-radius: 4px;
 }
@@ -74,7 +70,7 @@
 .input-container textarea {
     display: block;
     width: 100%;
-    min-height: 220px;
+    min-height: 180px;
     box-sizing: border-box;
     padding: 10px 15px;
 
@@ -90,13 +86,8 @@ input:focus {
     outline: none;
 }
 
-
-
-/* Buttons */
-
 .btn:hover {
     box-shadow: 0 1px 2px 0 rgba(26, 115, 232, 0.451), 0 1px 3px 1px rgba(26, 115, 232, 0.302);
-
 }
 
 .modal-close-btn {
@@ -115,7 +106,6 @@ input:focus {
     margin-left: 15px;
     width: 88px;
     background-color: #0b57d0;
-    /* Gmail's blue color */
     color: white;
     border: none;
     border-radius: 20px;

@@ -30,5 +30,6 @@
 @import './apps/mail/cmps/MailPreview.css';
 @import './apps/mail/cmps/MailNavBar.css';
 @import './apps/mail/cmps/WriteMail.css';
+@import './apps/mail/cmps/FilterMail.css';
 
 @import './basics/mq.css';

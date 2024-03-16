@@ -5,12 +5,14 @@
 
 .nav-bar .compose-btn {
     border-radius: 1em;
-    background-color: var(--mail-btn-bgc);
-    color: var(--black);
     height: 56px;
+    margin-left: 5px;
     padding-left: 8px;
     max-width: 125px;
     cursor: pointer;
+
+    background-color: var(--mail-btn-bgc);
+    color: var(--black);
 
     transition: box-shadow .08s linear, min-width .15s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -27,14 +29,24 @@
     height: 32px;
 }
 
+.nav-bar a.inbox {
+    font-weight: bold;
+    margin-top: 18px;
+}
+
+
 .nav-bar a:hover {
     background-color: var(--mail-nav-hover);
-    /* border-top-left-radius: 20px; */
-    /* Top left corner */
     border-top-right-radius: 20px;
-    /* Top right corner */
     border-bottom-right-radius: 20px;
-    /* Bottom right corner */
     border-bottom-left-radius: 0;
-    /* Bottom left corner */
+}
+
+.fa-regular {
+    padding-right: 5px;
+}
+
+.nav-bar .fa-solid {
+    padding-left: 2px;
+    padding-top: 0;
 }

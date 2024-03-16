@@ -147,9 +147,9 @@ export function MailIndex() {
             <button className="compose-btn" onClick={() => setIsOnCompose(true)}>
                 <i className="fa-solid fa-pencil"></i>Compose</button>
             {/* <Link className="" to="/mail/:mailId"></Link> */}
-            <Link to="#" onClick={() => { changeFolder('inbox') }}>Inbox ({unreadMails.length})</Link>
-            <Link to="#" onClick={() => { changeFolder('sent') }}>Sent</Link>
-            <Link to="#" onClick={() => { changeFolder('trash') }}>Trash</Link>
+            <Link to="#" className="inbox" onClick={() => { changeFolder('inbox') }}><i className="fa-regular fa-image"></i>Inbox ({unreadMails.length})</Link>
+            <Link to="#" onClick={() => { changeFolder('sent') }}><i class="fa-regular fa-paper-plane"></i>Sent</Link>
+            <Link to="#" onClick={() => { changeFolder('trash') }}><i class="fa-solid fa-trash"></i>Trash</Link>
             {/* <Link to="#" onClick={() => { changeFolder('unread') }}>Unread Mails </Link> */}
 
         </nav>

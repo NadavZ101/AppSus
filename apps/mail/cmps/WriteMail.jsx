@@ -50,7 +50,7 @@ export function WriteMail({ onComposeMail, isOnCompose, setCompose, onSetCompose
     const { subject, body, to } = mailToWrite
 
     return <div className="modal-overlay">
-        <div className="modal">
+        <div className="modal flex">
             <form className="modal-content" onSubmit={onWriteMail}>
                 <div className="modal-header"> <span className="modal-header-txt">New message</span>
 

@@ -5,9 +5,16 @@
    font-size: 14px;
 }
 
+tr {
+   align-items: center;
+}
+
+td.subject {
+   font-size: 0.875em;
+}
+
 .mail-details {
    font-family: roboto;
-
 }
 
 .mails-details-container {
@@ -39,7 +46,6 @@
 
 .details-actions {
    border-radius: 5px;
-   /* font-family: open-sans; */
 }
 
 .next-prev-btns {
@@ -64,13 +70,4 @@
 
 .message {
    padding-top: 1.25em;
-}
-
-tr {
-   align-items: center;
-}
-
-td.subject {
-   font-size: 0.875em;
-
 }
