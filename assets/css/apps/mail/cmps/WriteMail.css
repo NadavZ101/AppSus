@@ -3,6 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    bottom: 100px;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -15,25 +16,42 @@
 
 /* Modal Container */
 .modal {
+    position: fixed;
+    right: 20px;
+    /* 20px from the right */
+    bottom: 10px;
+    /* 20px from the bottom */
+
+    z-index: 10;
     background-color: white;
-    width: 600px;
-    height: 400px;
-    /* Adjust as needed */
+    width: 510px;
+    height: 385px;
+
+    max-width: 100%;
+    max-height: 100%;
+
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    /* padding: 0 20px; */
 }
 
-/* Modal Content (Form) */
-.modal-content {
+.modal-header {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    height: 40px;
+    background-color: #F2F6FC;
+}
+
+.modal-header-txt {
+    padding: 0 15px;
 }
 
 /* Input Fields */
 .input-container {
-    margin-bottom: 20px;
+    margin-bottom: 9px;
     border-bottom: 1px solid #ECEFF1;
+    padding: 0 15px;
+
 }
 
 /* Label */
@@ -50,68 +68,55 @@
 .input-container input[type="email"] {
 
     width: 100%;
-    padding: 8px;
     border: 1px solid transparent;
     border-radius: 4px;
 }
 
 
-/* .input-container input[name="body"] {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    /* padding: 8px; */
-/* border: 1px solid #ccc;
-    border-radius: 4px;
-}
-     */
-
-
 .input-container textarea {
     display: block;
     width: 100%;
-    min-height: 100px;
+    min-height: 220px;
     box-sizing: border-box;
-    padding: 10px;
-    /* Slightly more padding for better text entry space */
+    padding: 10px 15px;
+
     border: 1px solid #ccc;
-    /* Subtle border color */
     border-radius: 4px;
-    /* Rounded corners */
     background-color: #f8f9fa;
-    /* Light background color */
-    font-family: 'Roboto', 'Arial', sans-serif;
-    /* Clean, readable font */
+
+    font-family: roboto;
     font-size: 1rem;
-    /* Adequate font size for readability */
 }
 
 
 
 /* Buttons */
-.btn {
-    padding: 8px 16px;
-    margin-right: 10px;
-    max-width: 50px;
-    background-color: #0b57d0;
-    /* Gmail's blue color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    border-bottom-right-radius: 18px;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 18px;
-    border-top-left-radius: 0;
-}
 
 .btn:hover {
     box-shadow: 0 1px 2px 0 rgba(26, 115, 232, 0.451), 0 1px 3px 1px rgba(26, 115, 232, 0.302);
 
 }
 
-.close-btn {
+.modal-close-btn {
     height: 1em;
     width: 1em;
+    position: fixed;
+    right: 38px;
+    background-color: transparent;
+    border: none;
+}
+
+.send-btn {
+    position: fixed;
+    bottom: 20px;
+    padding: 8px 16px;
+    margin-left: 15px;
+    width: 88px;
+    background-color: #0b57d0;
+    /* Gmail's blue color */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
 }

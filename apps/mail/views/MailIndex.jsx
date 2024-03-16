@@ -137,22 +137,23 @@ export function MailIndex() {
 
     if (!mails) return <div>Loading Mails...</div>
     return <section className="mail-index">
-
-        <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+        <Link Link to="#" onClick={() => { changeFolder('inbox') }}>
+            <img className="logo" src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_rtl_r5.png" srcSet="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_2x_rtl_r5.png 2x ,https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_rtl_r5.png 1x"></img>
+        </Link>
+        <MailFilter className="filter" onSetFilter={onSetFilter} filterBy={filterBy} />
 
         <MailNavBar />
-        {/*  */}
-        <nav className="sidebar-menu flex">
+        <nav className="nav-bar flex">
 
             <Link to="/mail/:mailId"></Link>
-            <Link to="#" onClick={() => { changeFolder('inbox') }}>Inbox ({unreadMails.length})</Link>
+            <Link className="inbox" to="#" onClick={() => { changeFolder('inbox') }}>Inbox ({unreadMails.length})</Link>
             <Link to="#" onClick={() => { changeFolder('sent') }}>Sent</Link>
             <Link to="#" onClick={() => { changeFolder('trash') }}>Trash</Link>
             {/* <Link to="#" onClick={() => { changeFolder('unread') }}>Unread Mails </Link> */}
 
-
-            <MailList mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} onCountUnreadMails={onCountUnreadMails} />
         </nav>
+
+        <MailList className="mails-list" mails={mails} onTrashMail={onTrashMail} onReadMail={onReadMail} onCountUnreadMails={onCountUnreadMails} />
         {/* </React.Fragment> */}
         <Outlet />
     </section>
