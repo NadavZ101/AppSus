@@ -1,6 +1,6 @@
 header {
 
-    background: lightcyan;
+    background: #213363;
     border-bottom: 2px solid white;
 }
 
@@ -22,4 +22,10 @@ nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
+}
+
+img {}
+
+.toggle-menu-btn {
+    display: none
 }

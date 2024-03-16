@@ -1,0 +1,11 @@
+.about {
+    flex-direction: column;
+    margin: 0 20px;
+
+    font-family: roboto;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px 0;
+}

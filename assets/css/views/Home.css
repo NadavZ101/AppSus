@@ -1,1 +1,23 @@
  /* home */
+ .home {
+     flex-direction: column;
+     margin: 0 20px;
+
+     font-family: roboto;
+ }
+
+ h1 {
+     text-align: center;
+     margin: 10px 0;
+ }
+
+ .img-container {
+     display: flex;
+     justify-content: center;
+ }
+
+ img .home-img {
+     height: 100%;
+     width: 20%;
+     object-fit: cover
+ }
