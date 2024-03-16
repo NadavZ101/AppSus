@@ -4,6 +4,10 @@
         height: 80px;
     }
 
+    .mail-filter input {
+        width: 200px
+    }
+
     .modal {
         flex-direction: column;
         left: 5px;
@@ -31,6 +35,7 @@
         top: 0;
         right: 0;
         height: 40vh;
+        /* Adjust if necessary */
         width: 200px;
         background-color: #EBC49F;
         border-left: 1px solid #ccc;
@@ -40,13 +45,12 @@
         gap: 30px;
         transform: translateX(100%);
         transition: transform 0.6s;
-
+        overflow-y: auto;
         font-family: roboto;
     }
 
     .header-nav-btns.menu-close {
-        transform: translateX(100%);
-        transition: transform 0.6s;
+        display: none;
     }
 
     .header-nav-btns.menu-open {
@@ -57,6 +61,7 @@
         z-index: 2;
         transform: translateX(0);
         transition: transform 0.6s;
+        overflow-y: auto;
     }
 
     .header-nav-btns.menu-open a {

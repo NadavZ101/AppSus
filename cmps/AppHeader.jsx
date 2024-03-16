@@ -11,7 +11,7 @@ export function AppHeader() {
 
     return <header className="app-header flex">
         <Link to="/">
-            {/* <img src="/assets/img/appsus1.png" alt="logo" /> */}
+            <div className="logo">AppSuS</div>
         </Link>
         {menu === 'menu-open' && <div className="backdrop" onClick={() => setMenu('menu-close')}></div>}
         <nav className={`header-nav-btns ${menu}`}>
