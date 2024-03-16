@@ -4,13 +4,17 @@ import { mailService } from "./../services/mail.service.js"
 // import { showSuccessMsg, showErrorMsg } from './../services/event-bus.service.js'
 
 
-export function WriteMail({ setIsOnCompose }) {
+export function WriteMail({ onComposeMail, isOnCompose, setCompose, onSetCompose }) {
 
     const [mailToWrite, setMailToWrite] = useState(mailService.getEmptyMail())
 
-    useEffect(() => {
+    const [modal, setModal] = useState(false)
 
-    }, [])
+    // console.log(isOnCompose)
+    // console.log(onComposeMail)
+    // console.log(setCompose)
+    console.log(onSetCompose)
+
 
     function handleInput(ev) {
         let { value, name: field } = ev.target
@@ -39,7 +43,7 @@ export function WriteMail({ setIsOnCompose }) {
     }
 
     function closeModal() {
-        setIsOnCompose(false)
+        onComposeMail(false)
     }
 
 
@@ -49,7 +53,10 @@ export function WriteMail({ setIsOnCompose }) {
         <div className="modal">
             <form className="modal-content" onSubmit={onWriteMail}>
                 <div className="modal-header"> <span className="modal-header-txt">New message</span>
-                    <button className="modal-close-btn" type="button" onClick={closeModal}><i class="fa-thin fa-x"></i></button>
+
+                    <button className="modal-close-btn" type="button" onClick={() => closeModal()}><i className="fa-thin fa-x"></i>
+                    </button>
+
                 </div>
 
                 <div className="input-container flex align-center">

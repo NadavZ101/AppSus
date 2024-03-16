@@ -33,10 +33,3 @@
 .mails-list {
     grid-area: mails-list;
 }
-
-/* .modal {
-    top: 100px;
-    width: 300px;
-    height: 300px;
-    justify-content: center;
-} */

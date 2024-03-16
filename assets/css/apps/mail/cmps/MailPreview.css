@@ -2,12 +2,14 @@ tr.unread-mail {
     font-weight: bold;
 }
 
+tr.unread-mail.subject {
+    font-size: 0.875em;
+}
+
 tr.read-mail {
     background-color: #E6F1F2;
 }
 
-
-/* Additional styles for alignment and spacing */
 .mail-preview {
     display: flex;
     align-items: center;
@@ -16,7 +18,7 @@ tr.read-mail {
     border-bottom: 1px solid #ccc;
     background-color: #fff;
     transition: background-color 0.3s ease;
-    height: 40px;
+    height: 20px;
 }
 
 .mail-preview:hover {
@@ -38,83 +40,19 @@ tr.read-mail {
     margin-right: 10px;
 }
 
-
 .mail-preview .remove-btn-container {
     display: flex;
     justify-content: flex-end;
-    /* Align the button to the right */
     flex: 0.2;
-    /* Limit its size */
 }
 
 .remove-btn {
     border: none;
     background: transparent;
-    /* Make the button background transparent */
     cursor: pointer;
     padding: 5px;
-    /* Add some padding */
-}
-
-.remove-btn:hover {
-    scale: 1.02;
-    /* Slightly enlarge the button on hover */
-}
-
-
-
-/* 
-tr {
-    display: flex;
-    align-items: center;
-    background-color: #DFE3E8;
-    font-family: roboto;
-}
-
-tr:hover {
-    background-color: #f9f9f9;
-    scale: 1.02;
-    cursor: pointer;
-
-    box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
-}
-
-tr.from {
-    display: flex;
-
-}
-
-tr span.subject {}
-
-td {
-    display: flex;
-}
-
-.mail-preview {
-    height: 40px;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.mail-preview:hover {
-    background-color: #f4f4f4;
-}
-
-.mails-table td {
-    padding: 10px;
-}
-
-.remove-btn {
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 .remove-btn:hover {
     scale: 1.02;
 }
-
-.fa-solid {} */

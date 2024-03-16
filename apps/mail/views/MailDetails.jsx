@@ -30,20 +30,27 @@ export function MailDetails() {
     }
     console.log(mail)
 
-    if (isLoading) return
+    if (isLoading) return <div>Loading Mail...</div>
     return <section className="mail-details">
-        <Link to="/mail"><button>←</button></Link> {/* switch to icon */}
 
-        <h3>{mail.subject}</h3>
-        <h5>{mail.from}</h5>
-        <div>{mail.sentAt}</div>
-        <div>{mail.body}</div>
+        <div className="details-act-bts">
+            <Link to="/mail"><button className="arrows-btn" ><i class="fa-solid fa-arrow-left"></i></button></Link> {/* switch to icon */}
 
-        <div className="details-actions flex justify-between">
-            {/* switch to icons */}
-            <Link to={`/mail/${mail.prevMailId}`}><button>Prev Mail</button></Link>
-            <Link to={`/mail/${mail.nextMailId}`}><button>Next Mail</button></Link>
+            <div className="next-prev-btns">
+                <Link to={`/mail/${mail.prevMailId}`}><button className="arrows-btn" ><i className="fa-solid fa-arrow-left"></i></button></Link>
+                <Link to={`/mail/${mail.nextMailId}`}><button className="arrows-btn" ><i className="fa-solid fa-arrow-right"></i></button></Link>
+            </div>
         </div>
+
+        <div className="mails-details-container flex space-between">
+            <div className="subject">{mail.subject}</div>
+            <div className="from-date flex space-between">
+                <div className="from">{mail.from}</div>
+                <div className="date">{mail.sentAt}</div>
+            </div>
+            <div className="message">{mail.body}</div>
+        </div>
+
     </section>
 
 }

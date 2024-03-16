@@ -14,6 +14,8 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [unreadMails, setUnreadMails] = useState(null)
     const [folderMail, setFolderMail] = useState('inbox')
+    const [isOnCompose, setIsOnCompose] = useState(false)
+
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
     const mailId = useParams()
 
@@ -35,8 +37,7 @@ export function MailIndex() {
 
     function changeFolder(selectedFolder) {
         console.log('selected folder ', selectedFolder)
-        // setFolderMail(selectedFolder)
-        // console.log('Folder changed to:', folderMail)
+
         setFolderMail(selectedFolder)
         console.log('folderMail =  ', folderMail)
 
@@ -106,7 +107,6 @@ export function MailIndex() {
         // showSuccessMsg(`Mail moved to trash successfully (${mailId})`)
     }
 
-
     function onReadMail(mailId) {
         console.log(mailId)
         mailService.readMail(mailId)
@@ -142,11 +142,12 @@ export function MailIndex() {
         </Link>
         <MailFilter className="filter" onSetFilter={onSetFilter} filterBy={filterBy} />
 
-        <MailNavBar />
+        <MailNavBar onComposeMail={setIsOnCompose} isOnCompose={isOnCompose} />
         <nav className="nav-bar flex">
-
-            <Link to="/mail/:mailId"></Link>
-            <Link className="inbox" to="#" onClick={() => { changeFolder('inbox') }}>Inbox ({unreadMails.length})</Link>
+            <button className="compose-btn" onClick={() => setIsOnCompose(true)}>
+                <i className="fa-solid fa-pencil"></i>Compose</button>
+            {/* <Link className="" to="/mail/:mailId"></Link> */}
+            <Link to="#" onClick={() => { changeFolder('inbox') }}>Inbox ({unreadMails.length})</Link>
             <Link to="#" onClick={() => { changeFolder('sent') }}>Sent</Link>
             <Link to="#" onClick={() => { changeFolder('trash') }}>Trash</Link>
             {/* <Link to="#" onClick={() => { changeFolder('unread') }}>Unread Mails </Link> */}
@@ -160,7 +161,4 @@ export function MailIndex() {
 
 }
 
-{/* <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder('inbox')}>Inbox({unreadMails.length})</Link>
-            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder('sent')}>Sent</Link>
-            <Link to="/mail/list" className="sidebar-menu-links" onClick={() => changeFolder('trash')}>Trash</Link> */}
 

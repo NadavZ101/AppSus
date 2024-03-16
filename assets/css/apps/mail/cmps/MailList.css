@@ -1,25 +1,76 @@
- /* mail list */
+.mails-table {
+   width: 100%;
+   border-collapse: collapse;
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+}
 
- * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
- }
+.mail-details {
+   font-family: roboto;
 
- /* Style for the entire table */
- .mails-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
- }
+}
 
- /* .mails-table *> {
-    display: flex;
-    justify-content: space-between;
-    font-size: .875rem;
- } */
+.mails-details-container {
+   flex-direction: column;
 
- /* td {
-    padding: 0 1em;
- } */
+   padding: 0 1em;
+}
+
+.details-act-bts {
+   display: flex;
+}
+
+.arrows-btn {
+   display: flex;
+   background-color: transparent;
+   border: none;
+   font-size: 0.7em;
+   padding: 2px;
+   box-shadow: none;
+}
+
+.arrows-btn:hover {
+   display: flex;
+   background-color: var(--nxt-prv-hover);
+   border-radius: 20px;
+   box-shadow: none;
+}
+
+
+.details-actions {
+   border-radius: 5px;
+   /* font-family: open-sans; */
+}
+
+.next-prev-btns {
+   display: flex;
+   margin-left: auto;
+}
+
+.subject {
+   align-items: flex-start;
+   padding: 20px 72px 8px 0;
+   font-size: 1.375em;
+}
+
+.from {
+   font-weight: bold;
+   font-size: 0.875em;
+}
+
+.date {
+   font-size: 0.75em;
+}
+
+.message {
+   padding-top: 1.25em;
+}
+
+tr {
+   align-items: center;
+}
+
+td.subject {
+   font-size: 0.875em;
+
+}
