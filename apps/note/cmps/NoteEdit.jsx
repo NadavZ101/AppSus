@@ -5,8 +5,9 @@ const { useNavigate, useParams } = ReactRouter
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
-export function NoteEdit() {
-    const [noteToEdit, setNoteToEdit] = useState(noteService.getDefaultFilter())
+export function NoteEdit({notes}) {
+    const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
+    const [newNote, setNewNote] = useState(null)
     const navigate = useNavigate()
     const { noteId } = useParams()
     // const inputRef = useRef()
@@ -17,7 +18,6 @@ export function NoteEdit() {
     }, [])
 
     function loadNote() {
-        console.log('hello');
 
         noteService.get(noteId)
             .then(note => setNoteToEdit(note))
@@ -28,28 +28,27 @@ export function NoteEdit() {
     }
 
     function onSaveNote(ev) {
-        ev.preventDefault()
-
+        ev.preventDefault();
+    
         noteService.save(noteToEdit)
             .then(savedNote => {
-                navigate('/note')
-                showSuccessMsg('note saved successfully')
+                setNewNote(savedNote)
+                console.log('Updated noteToEdit:', noteToEdit);
+                navigate('/note');
+                showSuccessMsg('Note saved successfully');
             })
             .catch(err => {
-                console.error('Had issues saving note', err)
-                showErrorMsg('could not save note')
-            })
-
+                console.error('Had issues saving note', err);
+                showErrorMsg('Could not save note');
+            });
     }
 
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
-        console.log(value);
 
         if (field === 'title') {
-            const info = { ...noteToEdit.title, [field]: value }
-            setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, info }))
+              setNoteToEdit((prevNote) => ({ ...prevNote, info: { title:value } }))
             return
         }
 
@@ -57,18 +56,16 @@ export function NoteEdit() {
         setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, [field]: value }))
     }
    console.log(noteToEdit);
-    const { title, type } = noteToEdit
+    const { info, type } = noteToEdit
     // const {title}= info
-    console.log(title);
+    console.log(info);
 
 
 
     return (
 
         <section className="note-edit">
-            {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
 
-            {/* {showModal && ( */}
                 <form onSubmit={onSaveNote} >
                     {/* <dialog className="note-modal" method="dialog"> */}
                     <label htmlFor="title"></label>
@@ -81,7 +78,7 @@ export function NoteEdit() {
 
                         name="title"
                         onChange={handleChange}
-                        value={title}
+                        value={info.title}
                     />
 
                     {/* <label htmlFor="type">Note type:</label>
@@ -99,7 +96,6 @@ export function NoteEdit() {
                     {/* <button onClick={() => setShowModal(false)}>Close</button> */}
                     {/* </dialog> */}
                 </form>
-            {/* )} */}
         </section>
     )
 

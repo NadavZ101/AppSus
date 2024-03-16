@@ -10,7 +10,7 @@
 .note-display {
     position: relative;
     width: 240px;
-    height: auto;
+    height: 180px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

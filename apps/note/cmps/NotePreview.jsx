@@ -28,9 +28,9 @@ export function NotePreview({ notes, onRemoveNote, duplicateNote, onSetColor, on
                     <span className="note-text">{note.info.txt}</span>
 
                     <div className="actions-btn">
-                     
-                            <button className="remove-btn note-btn" onClick={() => { onRemoveNote(note.id) }}>
-                                <i className="fa-regular fa-trash-can"></i></button> 
+
+                        <button className="remove-btn note-btn" onClick={() => { onRemoveNote(note.id) }}>
+                            <i className="fa-regular fa-trash-can"></i></button>
                         <button className="note-btn" onClick={() => duplicateNote(note.id)}><i className="fa-regular fa-copy"></i></button>
                         <button className="pin-btn" onClick={() => onPinnedNote(note.id)}>  <i className="fa-solid fa-thumbtack"></i>
                         </button>

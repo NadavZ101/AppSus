@@ -53,17 +53,17 @@ export function NoteIndex() {
     function duplicateNote(noteId) {
         const noteToDuplicate = notes.find(note => note.id === noteId);
         if (!noteToDuplicate) return;
-    
+
         const newNote = {
             ...noteToDuplicate,
             id: '',
         };
-    
+
         noteService.save(newNote)
             .then(savedDuplicateNote => {
 
-                setNotes(prevNotes => [savedDuplicateNote,...prevNotes])
-    
+                setNotes(prevNotes => [savedDuplicateNote, ...prevNotes])
+
                 navigate('/note')
                 showSuccessMsg('Note saved successfully')
             })
@@ -117,8 +117,10 @@ export function NoteIndex() {
         <div>
             <Link to="/note/edit"><button className="add-btn"><i class="fa-regular fa-pen-to-square"></i>
             </button></Link>
-            <NoteEdit /> 
-            </div>
+            <NoteEdit
+                notes={notes}
+            />
+        </div>
 
 
         <NotePreview

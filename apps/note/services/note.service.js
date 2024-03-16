@@ -52,11 +52,13 @@ function remove(noteId) {
 }
 
 function save(note) {
+    console.log('NOTE',note);
     if (note.id) {
+        console.log('hi');
         return storageAsyncService.put(NOTE_KEY, note)
     } else {
+        // note = _createNote(note.info.title, note.type)
         console.log(note);
-        note = _createNote(note.info.title, note.type)
         return storageAsyncService.post(NOTE_KEY, note)
     }
 }
@@ -108,11 +110,11 @@ function _createNotes() {
 
 function getEmptyNote() {
     return {
-        id: utilService.makeId(),
+        id: '',
         createdAt: Date.now(),
-        type: '',
+        type: 'NoteTxt',
         isPinned: false,
-        style: { backgroundColor: '' },
+        style: { backgroundColor: '#FFFFFF' },
         info: { title: '', txt: '' }
     }
 }
