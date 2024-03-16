@@ -20,6 +20,7 @@
 /* Cmps */
 @import './apps/note/cmps/NotePreview.css';
 @import '/assets/css/apps/note/cmps/NoteFilter.css';
+@import '/assets/css/apps/note/cmps/NoteEdit.css';
 
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';

@@ -104,22 +104,37 @@ function _createNotes() {
     }
     storageService.saveToStorage(NOTE_KEY, notes)
 
-    // notes.push(_createNote('Hello', 'NoteTxt'))
-    // notes.push(_createNote('Hi', 'NoteTxt'))
-    // notes.push(_createNote('Hola', 'NoteTxt'))
 }
 
 function getEmptyNote() {
-    const timestamp = Date.now()
     return {
         id: utilService.makeId(),
-        createdAt: timestamp,
+        createdAt: Date.now(),
         type: '',
         isPinned: false,
         style: { backgroundColor: '' },
         info: { title: '', txt: '' }
     }
 }
+
+// function getEmptyNote(title = '', txt = '') {
+
+//     return {
+//         id: '',
+//         createdAt: new Date(),
+//         type: 'NoteTxt',
+//         isPinned: false,
+//         style: {
+//             backgroundColor: '#f6f8fc',
+//         },
+//         info: {
+//             title,
+//             txt
+//         }
+//     }
+// }
+
+
 
 function _createNote(title, type) {
     console.log('creatnote title ', title);

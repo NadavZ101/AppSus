@@ -43,19 +43,32 @@
 
 .actions-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    height: 24px;
-    width: 24px;
-    background: none;
+    bottom: 0;
+    right: auto;
+    background: transparent;
     border: none;
     padding: 0; 
     display: none;
-    z-index: 10;
+       gap: 8px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-display button{
+    background: none;
+    border: none;
+    height: 24px;
+    width: 24px;
 }
 
 .note-display:hover .actions-btn {
-    display: block;
+    display: flex;
+        align-items: center;
+}
+
+.remove-div{
+    background: none;
 }
 
 /* .pin-btn{

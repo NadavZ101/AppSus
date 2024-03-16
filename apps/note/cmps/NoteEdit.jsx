@@ -6,7 +6,6 @@ import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 export function NoteEdit() {
-    const [showModal, setShowModal] = useState(false)
     const [noteToEdit, setNoteToEdit] = useState(noteService.getDefaultFilter())
     const navigate = useNavigate()
     const { noteId } = useParams()
@@ -22,7 +21,6 @@ export function NoteEdit() {
 
         noteService.get(noteId)
             .then(note => setNoteToEdit(note))
-            // navigate('/note')
             .catch(err => {
                 console.error('Had issues loading note', err)
 
@@ -50,24 +48,11 @@ export function NoteEdit() {
         console.log(value);
 
         if (field === 'title') {
-            const info = { ...noteToEdit.info, [field]: value }
+            const info = { ...noteToEdit.title, [field]: value }
             setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, info }))
             return
         }
 
-        // switch (target.type) {
-        //     case 'number':
-        //     case 'range':
-        //         value = +value || ''
-        //         break
-
-        //     case 'checkbox':
-        //         value = target.checked
-        //         break
-
-        //     default:
-        //         break
-        // }
 
         setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, [field]: value }))
     }
@@ -81,24 +66,25 @@ export function NoteEdit() {
     return (
 
         <section className="note-edit">
-            <button onClick={() => setShowModal(true)}>Open Modal</button>
+            {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
 
-            {showModal && (
+            {/* {showModal && ( */}
                 <form onSubmit={onSaveNote} >
                     {/* <dialog className="note-modal" method="dialog"> */}
-                    <label htmlFor="title">Title:</label>
+                    <label htmlFor="title"></label>
                     <input
                         type="text"
                         id="title"
-                        placeholder="Enter title"
+                        placeholder="New note..."
+                        className="txt-input"
                         // ref={inputRef}
 
                         name="title"
                         onChange={handleChange}
-                        value={title|| 'e'}
+                        value={title}
                     />
 
-                    <label htmlFor="type">Note type:</label>
+                    {/* <label htmlFor="type">Note type:</label>
                     <input
                         type="text"
                         id="type"
@@ -107,13 +93,13 @@ export function NoteEdit() {
                         name="type"
                         onChange={handleChange}
                         value={type}
-                    />
+                    /> */}
 
                     <button>Save</button>
-                    <button onClick={() => setShowModal(false)}>Close</button>
+                    {/* <button onClick={() => setShowModal(false)}>Close</button> */}
                     {/* </dialog> */}
                 </form>
-            )}
+            {/* )} */}
         </section>
     )
 

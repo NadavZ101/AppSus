@@ -1,0 +1,14 @@
+.txt-input{
+    display: flex;
+    height: 42px;
+    width: 450px;
+    border-style: none;
+    border-radius: 10px;
+    background-color: #ededed;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #808080;
+    padding-left: 40px;
+    margin: 0 auto;
+}

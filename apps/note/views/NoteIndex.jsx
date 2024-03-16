@@ -1,5 +1,7 @@
 const { useState, useEffect } = React
 const { Link, useSearchParams } = ReactRouterDOM
+const { useNavigate, useParams } = ReactRouter
+
 
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
@@ -7,12 +9,15 @@ import { utilService } from "../../../services/util.service.js"
 
 import { NotePreview } from "../cmps/NotePreview.jsx"
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
+import { NoteEdit } from "../cmps/NoteEdit.jsx"
 
 export function NoteIndex() {
     // const [searchParams, setSearchParams] = useSearchParams()
 
     const [notes, setNotes] = useState(null)
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         loadNotes()
@@ -46,24 +51,25 @@ export function NoteIndex() {
     }
 
     function duplicateNote(noteId) {
-        const noteToDuplicate = notes.find(note => note.id === noteId)
-        if (!noteToDuplicate) return
-
+        const noteToDuplicate = notes.find(note => note.id === noteId);
+        if (!noteToDuplicate) return;
+    
         const newNote = {
             ...noteToDuplicate,
             id: '',
-        }
-
+        };
+    
         noteService.save(newNote)
             .then(savedDuplicateNote => {
-                setNotes(prevNotes => [...prevNotes, newNote])
 
+                setNotes(prevNotes => [savedDuplicateNote,...prevNotes])
+    
                 navigate('/note')
-                showSuccessMsg('note saved successfully')
+                showSuccessMsg('Note saved successfully')
             })
             .catch(err => {
                 console.error('Had issues saving note', err)
-                showErrorMsg('could not save note')
+                showErrorMsg('Could not save note')
             })
     }
 
@@ -108,7 +114,12 @@ export function NoteIndex() {
         <NoteFilter
             onSetFilter={onSetFilter}
             filterBy={{ title, type }} />
-        <Link to="/note/edit"><button className="add-btn"><i class="fa-regular fa-square-plus"></i></button></Link>
+        <div>
+            <Link to="/note/edit"><button className="add-btn"><i class="fa-regular fa-pen-to-square"></i>
+            </button></Link>
+            <NoteEdit /> 
+            </div>
+
 
         <NotePreview
             notes={notes}
@@ -118,5 +129,8 @@ export function NoteIndex() {
             onPinnedNote={onPinnedNote}
         // onUpdateNote={onUpdateNote}
         />
+
+
+
     </section>
 }
