@@ -115,8 +115,7 @@ export function NoteIndex() {
             onSetFilter={onSetFilter}
             filterBy={{ title, type }} />
         <div>
-            <Link to="/note/edit"><button className="add-btn"><i class="fa-regular fa-pen-to-square"></i>
-            </button></Link>
+           
             <NoteEdit
                 notes={notes}
             />

@@ -29,21 +29,22 @@ export function NotePreview({ notes, onRemoveNote, duplicateNote, onSetColor, on
 
                     <div className="actions-btn">
 
-                        <button className="remove-btn note-btn" onClick={() => { onRemoveNote(note.id) }}>
+                        <button title="delete" className="remove-btn note-btn" onClick={() => { onRemoveNote(note.id) }}>
                             <i className="fa-regular fa-trash-can"></i></button>
-                        <button className="note-btn" onClick={() => duplicateNote(note.id)}><i className="fa-regular fa-copy"></i></button>
-                        <button className="pin-btn" onClick={() => onPinnedNote(note.id)}>  <i className="fa-solid fa-thumbtack"></i>
+                        <button title="copy note " className="note-btn" onClick={() => duplicateNote(note.id)}><i className="fa-regular fa-copy"></i></button>
+                        <button title="pin note" className="pin-btn" onClick={() => onPinnedNote(note.id)}>  <i className="fa-solid fa-thumbtack"></i>
                         </button>
 
-                        <Link key={note.id} to={`/note/edit/${note.id}`}> <button className="edit-btn">Edit</button>
+                        <Link key={note.id} to={`/note/edit/${note.id}`}> <button title="edit" className="edit-btn">Edit</button>
                             {console.log(note)}   </Link>
 
                         <input
                             type="color"
-                            className="note-btn"
+                            className="color-input"
                             name="style.backgroundColor"
                             value={noteColor[note.id] || '#FFFFFF'}
                             onChange={(e) => onSetColor(note.id, e.target.value)}
+                            title="choose color "
                         />
                         <NoteImg notes={notes} />
                     </div>

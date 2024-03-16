@@ -26,6 +26,8 @@
     transform: translateY(-4px);
 }
 
+
+
 .note-title {
     font-size: 14px;
     font-weight: bold;
@@ -58,8 +60,8 @@
 .note-display button{
     background: none;
     border: none;
-    height: 24px;
-    width: 24px;
+    /* height: 30px;
+    width: 30px; */
 }
 
 .note-display:hover .actions-btn {
@@ -71,22 +73,9 @@
     background: none;
 }
 
-/* .pin-btn{
-    display: none;
-    background-color: rgb(212, 17, 17);
-  } */
-  /* .note-display:hover .pin-btn{
-    display: block;
-    height: 32px;
-    width:32px;
-    border-radius: 50%;
-    padding-top: 5px;
-    border-style: none;
-    justify-self: end;
-    align-self: flex-end;
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-  .pin-btn:hover{
-    background-color: rgb(233, 229, 229);
-  } */
+.color-input{
+    width: 4em;
+    background: none;
+
+}
+

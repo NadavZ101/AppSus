@@ -5,9 +5,9 @@ const { useNavigate, useParams } = ReactRouter
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
-export function NoteEdit({notes}) {
+export function NoteEdit({ notes }) {
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
-    const [newNote, setNewNote] = useState(null)
+    const [newNote, setNewNote] = useState({})
     const navigate = useNavigate()
     const { noteId } = useParams()
     // const inputRef = useRef()
@@ -29,7 +29,7 @@ export function NoteEdit({notes}) {
 
     function onSaveNote(ev) {
         ev.preventDefault();
-    
+
         noteService.save(noteToEdit)
             .then(savedNote => {
                 setNewNote(savedNote)
@@ -48,14 +48,14 @@ export function NoteEdit({notes}) {
         let value = target.value
 
         if (field === 'title') {
-              setNoteToEdit((prevNote) => ({ ...prevNote, info: { title:value } }))
+            setNoteToEdit((prevNote) => ({ ...prevNote, info: { title: value } }))
             return
         }
 
 
         setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, [field]: value }))
     }
-   console.log(noteToEdit);
+    console.log(noteToEdit);
     const { info, type } = noteToEdit
     // const {title}= info
     console.log(info);
@@ -66,22 +66,26 @@ export function NoteEdit({notes}) {
 
         <section className="note-edit">
 
-                <form onSubmit={onSaveNote} >
-                    {/* <dialog className="note-modal" method="dialog"> */}
-                    <label htmlFor="title"></label>
-                    <input
-                        type="text"
-                        id="title"
-                        placeholder="New note..."
-                        className="txt-input"
-                        // ref={inputRef}
+            <form onSubmit={onSaveNote} >
+                {/* <dialog className="note-modal" method="dialog"> */}
+                <label htmlFor="title"></label>
+                <div className="new-note">
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="New note..."
+                    className="txt-input"
+                    // ref={inputRef}
 
-                        name="title"
-                        onChange={handleChange}
-                        value={info.title}
-                    />
+                    name="title"
+                    onChange={handleChange}
+                    value={info.title}
+                />
+                <button className="add-btn" title="add note"><i className="fa-regular fa-pen-to-square"></i></button>
+                </div>
 
-                    {/* <label htmlFor="type">Note type:</label>
+
+                {/* <label htmlFor="type">Note type:</label>
                     <input
                         type="text"
                         id="type"
@@ -91,11 +95,11 @@ export function NoteEdit({notes}) {
                         onChange={handleChange}
                         value={type}
                     /> */}
-
-                    <button>Save</button>
-                    {/* <button onClick={() => setShowModal(false)}>Close</button> */}
-                    {/* </dialog> */}
-                </form>
+               
+                
+                {/* <button onClick={() => setShowModal(false)}>Close</button> */}
+                {/* </dialog> */}
+            </form>
         </section>
     )
 
