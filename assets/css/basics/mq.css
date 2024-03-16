@@ -1,0 +1,7 @@
+@media (max-width: 850px) {
+
+    .mail-preview {
+        height: 80px;
+        /* flex-wrap: wrap; */
+    }
+}

@@ -48,21 +48,12 @@ export function WriteMail({ setIsOnCompose }) {
     return <div className="modal-overlay">
         <div className="modal">
             <form className="modal-content" onSubmit={onWriteMail}>
-                <button className="close-btn" type="button" onClick={closeModal}>X</button>
-                <div className="input-container flex align-center">
-                    <label htmlFor="subject">Subject:</label>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        onChange={handleInput}
-                        value={subject}
-                        required
-                    />
+                <div className="modal-header"> <span className="modal-header-txt">New message</span>
+                    <button className="modal-close-btn" type="button" onClick={closeModal}><i class="fa-thin fa-x"></i></button>
                 </div>
 
                 <div className="input-container flex align-center">
-                    <label htmlFor="email">To:</label>
+                    <label htmlFor="email">To</label>
                     <input
                         type="email"
                         id="email"
@@ -75,6 +66,19 @@ export function WriteMail({ setIsOnCompose }) {
                     />
                 </div>
 
+                <div className="input-container flex align-center">
+                    <label htmlFor="subject">Subject</label>
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        onChange={handleInput}
+                        value={subject}
+                        required
+                    />
+                </div>
+
+
                 <div className="input-container flex">
                     <label htmlFor="body"></label>
                     <textarea
@@ -86,7 +90,7 @@ export function WriteMail({ setIsOnCompose }) {
                     />
 
                 </div>
-                <button className="btn">Send</button>
+                <button className="send-btn">Send</button>
             </form>
         </div>
     </div>

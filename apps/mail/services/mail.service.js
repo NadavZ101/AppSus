@@ -162,9 +162,13 @@ function _createMails() {
     let emails = storageService.loadFromStorage(MAIL_KEY)
     if (!emails || !emails.length) {
         emails = []
-        emails.push(_createMail('Hello Haim', email.from, loggedinUser.email))
-        emails.push(_createMail('Whats up Nadav?', email.from, loggedinUser.email))
         emails.push(_createMail(' Offer from Nigirian Prince ', email.from, loggedinUser.email))
+        emails.push(_createMail('Now hiring: “developer” at Expert Executive Recruiters ', email.from = 'Linkedin', loggedinUser.email))
+        emails.push(_createMail('WIN £250 LACED CREDIT', email.from = 'Laced', loggedinUser.email))
+        emails.push(_createMail(' Welcome to Google Cloud ', email.from = 'Google Cloud', loggedinUser.email))
+        emails.push(_createMail(' Buy more storage space ', email.from = 'DropBox', loggedinUser.email))
+        emails.push(_createMail(' 1 day left: Get an exclusive dedicated IP deal for our users only ', email.from = 'The NordVPN team', loggedinUser.email))
+        emails.push(_createMail(' Visit Rome ', email.from = 'TripAdvisor', loggedinUser.email))
         console.log('service -> _createMails -> emails', emails)
 
         storageService.saveToStorage(MAIL_KEY, emails)

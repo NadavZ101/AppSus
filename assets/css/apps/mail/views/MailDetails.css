@@ -1,9 +1,13 @@
 .mail-details {
     display: flex;
     flex-direction: column;
-
+    font-family: roboto;
 }
+
+
 
 .details-actions {
     border-radius: 5px;
+    font-family: open-sans;
+
 }

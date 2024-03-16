@@ -24,14 +24,14 @@ export function MailPreview({ mail, onTrashMail, onReadMail, onCountUnreadMails 
     }
 
     return <tr className={`mail-preview flex ${setUnReadClass()}`} onClick={handleMailClick}>
-        <td >{mail.from}</td>
-        <td>{mail.subject}</td>
+        <td className="from">{mail.from}</td>
+        <td className="subject">{mail.subject}</td>
 
-        <td><button className="remove-btn" onClick={handleTrashClick}>
-            <i className="fa-solid fa-trash"></i>
-        </button>
+        <td className="remove-btn-container">
+            <button className="remove-btn" onClick={handleTrashClick}>
+                <i className="fa-solid fa-trash"></i>
+            </button>
         </td>
-        {/* add trash icon */}
 
     </tr>
 }
