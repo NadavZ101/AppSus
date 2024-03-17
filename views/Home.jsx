@@ -1,6 +1,6 @@
 
 export function Home() {
-    return <section className="home">
+    return <section className="home-layout">
         <h1>AppSus - Your Go To App</h1>
 
         <div className="img-container">
