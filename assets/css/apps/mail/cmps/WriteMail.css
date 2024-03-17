@@ -7,7 +7,6 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 
-    /* Semi-transparent black */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +18,7 @@
     right: 20px;
     bottom: 10px;
 
-    background-color: white;
+    background-color: var(--white);
     width: 510px;
     height: 385px;
 
@@ -35,7 +34,7 @@
     justify-content: space-between;
     align-items: center;
     height: 40px;
-    background-color: #F2F6FC;
+    background-color: var(--modal-header);
     margin-bottom: 3px;
 }
 
@@ -45,7 +44,7 @@
 
 .input-container {
     margin-bottom: 9px;
-    border-bottom: 1px solid #ECEFF1;
+    border-bottom: 1px solid var(--input);
     padding: 0 15px;
 }
 
@@ -76,7 +75,7 @@
 
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #f8f9fa;
+    background-color: var(--input-textarea);
 
     font-family: roboto;
     font-size: 1rem;
@@ -101,14 +100,16 @@ input:focus {
 
 .send-btn {
     position: fixed;
-    bottom: 20px;
+    left: 427px;
+    bottom: 29px;
     padding: 8px 16px;
     margin-left: 15px;
     width: 88px;
-    background-color: #0b57d0;
+    background-color: var(--sent-btn);
     color: white;
     border: none;
     border-radius: 20px;
     cursor: pointer;
+
 
 }

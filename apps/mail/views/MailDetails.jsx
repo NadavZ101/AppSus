@@ -34,7 +34,7 @@ export function MailDetails() {
     return <section className="mail-details">
 
         <div className="details-act-bts">
-            <Link to="/mail"><button className="arrows-btn" ><i class="fa-solid fa-arrow-left"></i></button></Link> {/* switch to icon */}
+            <Link to="/mail"><button className="arrows-btn" ><i class="fa-solid fa-arrow-left"></i></button></Link>
 
             <div className="next-prev-btns">
                 <Link to={`/mail/${mail.prevMailId}`}><button className="arrows-btn" ><i className="fa-solid fa-arrow-left"></i></button></Link>
