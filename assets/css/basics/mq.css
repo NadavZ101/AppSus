@@ -32,7 +32,7 @@
         right: 0;
         height: 40vh;
         width: 200px;
-        background-color: #EBC49F;
+        background-color: lightblue;
         border-left: 1px solid #ccc;
         flex-direction: column;
         justify-content: center;
@@ -66,7 +66,7 @@
     }
 
     .header-nav-btns.menu-open a:hover {
-        background-color: whitesmoke;
+        /* background-color: whitesmoke; */
         border-radius: 20px;
     }
 

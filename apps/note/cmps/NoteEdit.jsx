@@ -33,14 +33,14 @@ export function NoteEdit({ notes }) {
         noteService.save(noteToEdit)
             .then(savedNote => {
                 setNewNote(savedNote)
-                console.log('Updated noteToEdit:', noteToEdit);
-                navigate('/note');
-                showSuccessMsg('Note saved successfully');
+                console.log('Updated noteToEdit:', noteToEdit)
+                navigate('/note')
+                showSuccessMsg('Note saved successfully')
             })
             .catch(err => {
-                console.error('Had issues saving note', err);
-                showErrorMsg('Could not save note');
-            });
+                console.error('Had issues saving note', err)
+                showErrorMsg('Could not save note')
+            })
     }
 
     function handleChange({ target }) {

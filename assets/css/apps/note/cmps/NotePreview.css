@@ -18,7 +18,6 @@
     cursor: pointer;
     transition: transform 0.2s ease;
     min-height: 100px;
-    z-index: 1;
 
 }
 
