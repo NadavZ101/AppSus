@@ -13,13 +13,18 @@
         left: 5px;
         top: 10px;
 
+        width: 300px;
+
         background-color: white;
         width: auto;
         height: 385px;
     }
 
+
+
     .send-btn {
-        bottom: 170px;
+        bottom: 361px;
+        left: 5px;
     }
 
     .app-header {
@@ -35,7 +40,6 @@
         top: 0;
         right: 0;
         height: 40vh;
-        /* Adjust if necessary */
         width: 200px;
         background-color: #EBC49F;
         border-left: 1px solid #ccc;

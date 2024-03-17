@@ -54,7 +54,7 @@ export function WriteMail({ onComposeMail, isOnCompose, setCompose, onSetCompose
             <form className="modal-content" onSubmit={onWriteMail}>
                 <div className="modal-header"> <span className="modal-header-txt">New message</span>
 
-                    <button className="modal-close-btn" type="button" onClick={() => closeModal()}><i className="fa-thin fa-x"></i>
+                    <button className="modal-close-btn" type="button" onClick={() => closeModal()}>X
                     </button>
 
                 </div>
