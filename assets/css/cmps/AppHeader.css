@@ -24,13 +24,16 @@ nav a.active {
     text-decoration: overline;
 }
 
-img {}
+.logo {
+    font-family: madimi;
+    color: var(--white);
+}
 
 .toggle-menu-btn {
     display: none
 }
 
-.header-nav-btns{
+.header-nav-btns {
     color: white;
     font-family: open-sans;
 }

@@ -2,11 +2,12 @@ const { useState, useEffect } = React
 const { Link, Outlet, useParams, useSearchParams } = ReactRouterDOM
 const { useNavigate } = ReactRouter
 
-
 import { MailList } from "../cmps/MailList.jsx"
 import { MailNavBar } from "../cmps/MailNavBar.jsx"
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { mailService } from "./../services/mail.service.js"
+
+import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 
 export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -18,9 +19,6 @@ export function MailIndex() {
 
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
     const mailId = useParams()
-
-    // console.log(filterBy)
-
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -43,23 +41,6 @@ export function MailIndex() {
 
         // setFilterBy({ ...filterBy, folderMail: selectedFolder })
     }
-
-
-    // function loadMails(folder) {
-    //     console.log('Loading mails for folder:', folder)
-    //     mailService.query(filterBy).then(mails => {
-    //         let filteredMails
-    //         if (folder === 'inbox') {
-    //             filteredMails = mails.filter(mail => mail.to === 'user@appsus.com' && !mail.removedAt)
-    //         } else if (folder === 'sent') {
-    //             filteredMails = mails.filter(mail => mail.from === 'user@appsus.com' && !mail.removedAt)
-    //         } else if (folder === 'trash') {
-    //             filteredMails = mails.filter(mail => mail.removedAt)
-    //         }
-    //         console.log(`${folder} = `, filteredMails)
-    //         setMails(filteredMails)
-    //     })
-    // }
 
     function loadMails() {
         console.log('Loading mails for folder:', folderMail)
@@ -104,7 +85,7 @@ export function MailIndex() {
         setMails((prevMails) => prevMails.filter(mail => mail.id !== mailId))
         console.log(mails)
         console.log('Mail moved to trash successfully ')
-        // showSuccessMsg(`Mail moved to trash successfully (${mailId})`)
+        showSuccessMsg(`Mail moved to trash successfully (${mailId})`)
     }
 
     function onReadMail(mailId) {
