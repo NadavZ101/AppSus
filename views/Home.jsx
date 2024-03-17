@@ -4,7 +4,7 @@ export function Home() {
         <h1>AppSus - Your Go To App</h1>
 
         <div className="img-container">
-            <img style={{ width: "20%" }} className="home-img" src="/assets/img/appsus1.png" alt="logo" />
+            <img style={{ width: "20%" }} className="home-img" src="assets/img/appsus1.png" alt="logo" />
         </div>
 
         <article>AppSus is a dynamic and innovative application designed to streamline your communication and organization needs in one convenient platform. With its seamless integration of mail services and note-keeping functionalities, AppSus empowers users to manage their emails and notes effortlessly, all under one roof.</article>
